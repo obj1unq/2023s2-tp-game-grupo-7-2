@@ -3,6 +3,7 @@ import carpincho.*
 import direcciones.*
 import obstaculos.*
 import extras.*
+import enemigos.*
 
 program juego {
 	game.title("El carpincho de Nordelta")
@@ -13,13 +14,18 @@ program juego {
 	
 	//game.boardGround("fondo.png")
 	
+	game.addVisual(perro)
+	game.addVisual(humano)
 	game.addVisual(pasto)
+	
 	game.addVisual(carpincho)
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
 	keyboard.left().onPressDo({carpincho.mover(izquierda)})
 	keyboard.right().onPressDo({carpincho.mover(derecha)})
+	
+	game.onCollideDo(carpincho, {enemigo => enemigo.colision(carpincho)})
 	
 	game.start()
 }
