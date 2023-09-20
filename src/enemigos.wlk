@@ -1,14 +1,11 @@
 import wollok.game.*
 
 object perro {
-	const  energiaQueSaca = 50
+	var property position = game.at(3, 7)
+	const energiaQueSaca = 50
+	
 	method image() {
 		return "perro.png"
-	}
-	
-	method position() {
-		return game.at(3, 7) 
-		
 	}
 	
 	method colision(personaje) {
@@ -20,18 +17,21 @@ object perro {
 		return energiaQueSaca
 	}
 	
+	method posicionAleatoria(){
+		const x = 0.randomUpTo(game.width())
+		const y = 0.randomUpTo(game.height())
+		
+		position = game.at(x, y)
+	}
+	
 }
 
 object humano {
+	var property position = game.at(5, 4)
 	const energiaQueSaca = 4000
 	
 	method image() {
 		return "humana.png"
-	}
-	
-	method position() {
-		return game.at(4, 4) 
-		
 	}
 	
 	method colision(personaje) {
@@ -40,6 +40,13 @@ object humano {
 	
 	method energiaQueSaca() {
 		return energiaQueSaca
+	}
+	
+	method posicionAleatoria(){
+		const x = 0.randomUpTo(game.width())
+		const y = 0.randomUpTo(game.height())
+		
+		position = game.at(x, y)
 	}
 }
 
