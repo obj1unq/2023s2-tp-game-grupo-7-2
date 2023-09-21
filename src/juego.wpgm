@@ -20,8 +20,8 @@ program juego {
 	
 	game.addVisual(carpincho)
 	
-	game.onTick(1000, "mover humano", { humano.posicionAleatoria() })
-	game.onTick(1000, "mover perro", { perro.posicionAleatoria() })
+	game.onTick(1000, "mover", { humano.mover() })
+	game.onTick(1000, "mover", { perro.mover() })
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})

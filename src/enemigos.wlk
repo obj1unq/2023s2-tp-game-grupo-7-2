@@ -1,7 +1,8 @@
 import wollok.game.*
+import direcciones.*
 
 object perro {
-	var property position = game.at(3, 7)
+	var property position = game.at(0, 5)
 	const energiaQueSaca = 50
 	
 	method image() {
@@ -17,17 +18,21 @@ object perro {
 		return energiaQueSaca
 	}
 	
-	method posicionAleatoria(){
-		const x = 0.randomUpTo(game.width())
-		const y = 0.randomUpTo(game.height())
-		
-		position = game.at(x, y)
+	method puedeOcupar(posicion) {
+		return tablero.pertenece(posicion)
+	}
+	
+	method mover(){
+		const proxima = derecha.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		}
 	}
 	
 }
 
 object humano {
-	var property position = game.at(5, 4)
+	var property position = game.at(0, 7)
 	const energiaQueSaca = 4000
 	
 	method image() {
@@ -42,11 +47,15 @@ object humano {
 		return energiaQueSaca
 	}
 	
-	method posicionAleatoria(){
-		const x = 0.randomUpTo(game.width())
-		const y = 0.randomUpTo(game.height())
-		
-		position = game.at(x, y)
+	method puedeOcupar(posicion) {
+		return tablero.pertenece(posicion)
+	}
+	
+	method mover(){
+		const proxima = derecha.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		}
 	}
 }
 

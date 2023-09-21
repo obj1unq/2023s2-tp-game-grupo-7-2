@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 
 object carpincho {
-	var position = game.at(2, 5)
+	var position = game.at(2, 2)
 	var energia = 1000
 	
 	method position() {
@@ -35,22 +35,21 @@ object carpincho {
 	
 	method validarMover(direccion) {
 		if(not self.sePuedeMover(direccion)) {
-			self.error("No puedo ir ahí")
+			self.error("No puedo moverme ahí")
 		} 
 	}
 	
 	method mover(direccion) {
-		//self.validarMover(direccion)
-		if( self.sePuedeMover(direccion)) {
-			const proxima = direccion.siguiente(self.position())		
+		self.validarMover(direccion)
+		const proxima = direccion.siguiente(self.position())		
 		self.position(proxima)	
-		}
 			
 	}
 	
 	method enfrentarseA(personaje) {
 		energia -= personaje.energiaQueSaca()
 		if(not self.tieneEnergiaParaMover()) {
+			game.removeTickEvent("mover")
 			game.schedule(3000, {game.stop()})
 		}
 	}
