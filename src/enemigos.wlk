@@ -1,7 +1,7 @@
 import wollok.game.*
 import direcciones.*
 
-object perro {
+class Perro {
 	var property position = game.at(0, 5)
 	const energiaQueSaca = 50
 	var property estaDeRegreso = false
