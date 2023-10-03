@@ -13,7 +13,7 @@ object carpincho {
 		position = _position
 	}
 	
-	method image() = "carpincho-izquierda.png"
+	method image() = "carpincho-derecha.png"
 	
 	method energiaParaMover() {
 		return 10

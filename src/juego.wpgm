@@ -10,9 +10,9 @@ program juego {
 	var perro2 = new Perro(position=game.at(0, 4))
 	game.title("El carpincho de Nordelta")
 	
-	game.width(20)
+	game.width(15)
 	game.height(12)
-	game.cellSize(80)
+	game.cellSize(70)
 	
 	//game.boardGround("fondo.png")
 	
@@ -23,9 +23,9 @@ program juego {
 	
 	game.addVisual(carpincho)
 	
-	game.onTick(200, "mover", { humano.mover() })
-	game.onTick(200, "mover", { perro1.mover() })
-	game.onTick(200, "mover", { perro2.mover() })
+	game.onTick(1000, "mover", { humano.mover() })
+	game.onTick(1000, "mover", { perro1.mover() })
+	game.onTick(1000, "mover", { perro2.mover() })
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
