@@ -6,8 +6,6 @@ import extras.*
 import enemigos.*
 
 program juego {
-	var perro1 = new Perro(position=game.at(0, 5))
-	var perro2 = new Perro(position=game.at(0, 4))
 	game.title("El carpincho de Nordelta")
 	
 	game.width(15)
@@ -16,16 +14,13 @@ program juego {
 	
 	//game.boardGround("fondo.png")
 	
-	game.addVisual(perro1)
-	game.addVisual(perro2)
 	game.addVisual(humano)
 	game.addVisual(pasto)
 	
 	game.addVisual(carpincho)
 	
-	game.onTick(1000, "mover", { humano.mover() })
-	game.onTick(1000, "mover", { perro1.mover() })
-	game.onTick(1000, "mover", { perro2.mover() })
+	game.onTick(1000, "MOVER", { humano.mover() })
+	game.onTick(2000,"PERROS", {perrosManager.generar()})
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})

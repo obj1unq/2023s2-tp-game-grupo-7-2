@@ -3,16 +3,15 @@ import direcciones.*
 
 class Perro {
 	var property position = game.at(0, 5)
-	const energiaQueSaca = 50
-	var property estaDeRegreso = false
+	const energiaQueSaca
+	const estado  
 	
 	method image() {
-		return "perro.png"
+		return estado.image()
 	}
 	
 	method colision(personaje) {
-		personaje.enfrentarseAVisual(self)
-		game.removeVisual(self)	
+		estado.colision(personaje, self)
 	}
 	
 	method energiaQueSaca() {
@@ -24,27 +23,95 @@ class Perro {
 	}
 	
 	method mover(){
-		const proxima = self.proximaDireccion()
-		self.position(proxima)
+		const proxima = derecha.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		} else {
+			perrosManager.quitar(self)
+		}
 	}
 	
-	method proximaDireccion(){
-		if (self.puedeOcupar(derecha.siguiente(self.position())) && not self.estaDeRegreso()) {
-			estaDeRegreso = false
-			return derecha.siguiente(self.position())
-		}
-		else if (self.puedeOcupar(izquierda.siguiente(self.position()))){
-			estaDeRegreso = true
-			return izquierda.siguiente(self.position())
-		}
-		else{
-			estaDeRegreso = false
-			return derecha.siguiente(self.position())
-		}
 	
-	}
+//	method proximaDireccion(){
+//		if (self.puedeOcupar(derecha.siguiente(self.position())) && not self.estaDeRegreso()) {
+//			estaDeRegreso = false
+//			return derecha.siguiente(self.position())
+//		}
+//		else if (self.puedeOcupar(izquierda.siguiente(self.position()))){
+//			estaDeRegreso = true
+//			return izquierda.siguiente(self.position())
+//		}
+//		else{
+//			estaDeRegreso = false
+//			return derecha.siguiente(self.position())
+//		}
+//	
+//	}
 	
 }
+
+object perroDomesticado {
+	method image() {
+		return "perro-domesticado.png"
+	}
+	
+	method colision(personaje, perro) {
+		personaje.enfrentarseAVisual(perro)
+		perrosManager.quitar(perro)	
+	}
+}
+
+object perroCallejero {
+	method image() {
+		return "perro-callejero.png"
+	}
+	
+	method colision(personaje, perro) {
+		personaje.enfrentarseAVisual(perro)
+		personaje.position(game.at(personaje.position().x(), personaje.position().y()-3))	
+		perrosManager.quitar(perro)
+	}
+}
+
+object callejeroFactory {
+	
+	method nuevo() {
+		return new Perro(energiaQueSaca = 100, estado = perroCallejero)
+	}
+}
+
+object domesticadoFactory {
+	method nuevo() {
+		return new Perro(energiaQueSaca = 50, estado = perroDomesticado)
+	}
+}
+
+object perrosManager {
+	
+	var generados = #{}
+	
+	const factories = [callejeroFactory, domesticadoFactory]
+	
+	
+	method seleccionarFactory() {
+		return factories.anyOne() //igual de probabilidad
+	}
+	
+	method generar() {
+		const perro = self.seleccionarFactory().nuevo() 		
+		game.addVisual(perro)	
+		generados.add(perro)
+		game.onTick(1000, "MOVER", { perro.mover() })
+	}
+	
+	method quitar(perro) {
+		generados.remove(perro)
+		game.removeVisual(perro)
+	}
+	
+
+}
+
 
 object humano {
 	var property position = game.at(0, 7)
