@@ -4,14 +4,12 @@ import direcciones.*
 class Perro {
 	var property position = game.at(0, 5)
 	const energiaQueSaca
-	const estado  
 	
-	method image() {
-		return estado.image()
-	}
+	method image() 
 	
 	method colision(personaje) {
-		estado.colision(personaje, self)
+		personaje.enfrentarseAVisual(self)
+		perrosManager.quitar(self)
 	}
 	
 	method energiaQueSaca() {
@@ -32,69 +30,48 @@ class Perro {
 	}
 	
 	
-//	method proximaDireccion(){
-//		if (self.puedeOcupar(derecha.siguiente(self.position())) && not self.estaDeRegreso()) {
-//			estaDeRegreso = false
-//			return derecha.siguiente(self.position())
-//		}
-//		else if (self.puedeOcupar(izquierda.siguiente(self.position()))){
-//			estaDeRegreso = true
-//			return izquierda.siguiente(self.position())
-//		}
-//		else{
-//			estaDeRegreso = false
-//			return derecha.siguiente(self.position())
-//		}
-//	
-//	}
-	
 }
 
-object perroDomesticado {
-	method image() {
+class PerroDomesticado inherits Perro {
+	override method image() {
 		return "perro-domesticado.png"
 	}
 	
-	method colision(personaje, perro) {
-		personaje.enfrentarseAVisual(perro)
-		perrosManager.quitar(perro)	
-	}
 }
 
-object perroCallejero {
-	method image() {
+class PerroCallejero inherits Perro {
+	override method image() {
 		return "perro-callejero.png"
 	}
 	
-	method colision(personaje, perro) {
-		personaje.enfrentarseAVisual(perro)
+	override method colision(personaje) {
+		super(personaje)
 		personaje.position(game.at(personaje.position().x(), personaje.position().y()-3))	
-		perrosManager.quitar(perro)
 	}
 }
 
 object callejeroFactory {
 	
 	method nuevo() {
-		return new Perro(energiaQueSaca = 100, estado = perroCallejero)
+		return new PerroCallejero(energiaQueSaca = 100)
 	}
 }
 
 object domesticadoFactory {
 	method nuevo() {
-		return new Perro(energiaQueSaca = 50, estado = perroDomesticado)
+		return new PerroDomesticado(energiaQueSaca = 50)
 	}
 }
 
 object perrosManager {
 	
-	var generados = #{}
+	const generados = #{}
 	
 	const factories = [callejeroFactory, domesticadoFactory]
 	
 	
 	method seleccionarFactory() {
-		return factories.anyOne() //igual de probabilidad
+		return factories.anyOne() 
 	}
 	
 	method generar() {

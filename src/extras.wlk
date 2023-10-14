@@ -1,4 +1,5 @@
 import wollok.game.*
+import carpincho.*
 
 object pasto {
 	
@@ -11,4 +12,19 @@ object pasto {
 		
 	}
 	
+	method colision(personaje) {}
+	
+}
+
+object vida {
+	method image() {
+		return return "vida-" + carpincho.vidaVisual() + ".png"
+	}
+	
+	method position() {
+		return game.at(0, game.height() - 1) 
+		
+	}
+	
+	method colision(personaje) {}
 }

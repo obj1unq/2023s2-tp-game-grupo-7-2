@@ -16,6 +16,7 @@ program juego {
 	
 	game.addVisual(humano)
 	game.addVisual(pasto)
+	game.addVisual(vida)
 	
 	game.addVisual(carpincho)
 	
