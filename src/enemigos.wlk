@@ -74,11 +74,29 @@ object perrosManager {
 		return factories.anyOne() 
 	}
 	
+	method iniciarGeneracionYMovimiento() {
+		self.iniciarGeneracion(2)
+		self.iniciarMovimiento()
+	}
+	
+	method iniciarGeneracion(segundos) {
+		game.onTick(segundos * 1000,"PERROS", {self.generar()})
+	}
+	
+	method cambiarGeneracion(segundos) {
+		game.removeTickEvent("PERROS")
+		self.iniciarGeneracion(segundos)
+	}
+	
+	method iniciarMovimiento() {
+		game.onTick(1000, "MOVER", { generados.forEach({ perro => perro.mover()}) })
+	}
+	
 	method generar() {
 		const perro = self.seleccionarFactory().nuevo() 		
 		game.addVisual(perro)	
 		generados.add(perro)
-		game.onTick(1000, "MOVER", { perro.mover() })
+		
 	}
 	
 	method quitar(perro) {
