@@ -20,7 +20,7 @@ program juego {
 	
 	game.addVisual(carpincho)
 	
-	game.onTick(1000, "MOVER", { humano.mover() })
+	game.onTick(500, "MOVER", { humano.mover() })
 	perrosManager.iniciarGeneracionYMovimiento()
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	

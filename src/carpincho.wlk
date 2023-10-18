@@ -4,6 +4,7 @@ import direcciones.*
 object carpincho {
 	var position = game.at(2, 2)
 	var energia = 1000
+	var property perfil = derecha
 	
 	method position() {
 		return position
@@ -13,7 +14,11 @@ object carpincho {
 		position = _position
 	}
 	
-	method image() = "carpincho-derecha.png"
+	//method image() = "carpincho-derecha.png"
+	
+	method image() {
+		return "" + self + "-" + self.perfil() + ".png"
+	}
 	
 	method energiaParaMover() {
 		return 10
@@ -52,8 +57,17 @@ object carpincho {
 	method mover(direccion) {
 		self.validarMover(direccion)
 		const proxima = direccion.siguiente(self.position())		
-		self.position(proxima)	
-			
+		self.position(proxima)
+		self.cambiarPerfil(direccion)
+		
+	}
+	
+	method cambiarPerfil(direccion){
+		if (direccion == izquierda || direccion == derecha){
+			self.perfil(direccion)	
+		} else {
+			self.perfil(self.perfil())
+		}
 	}
 	
 	method enfrentarseA(personaje) {
