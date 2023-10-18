@@ -1,8 +1,42 @@
 import wollok.game.*
-import pepita.*
+import carpincho.*
+import direcciones.*
+import obstaculos.*
+import extras.*
+import enemigos.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	
+	var mujerGrande = new Humano(position = game.at(0, 7))
+	var seniora = new Humano(position = game.at(0, 9))
+	
+	game.title("El carpincho de Nordelta")
+	
+	game.width(15)
+	game.height(12)
+	game.cellSize(70)
+	
+	//game.boardGround("fondo.png")
+	
+	game.addVisual(salida)
+	game.addVisual(mujerGrande)
+	game.addVisual(seniora)
+	game.addVisual(pasto)
+	game.addVisual(vida)
+	
+	game.addVisual(carpincho)
+	
+	game.onTick(300, "MOVER", { mujerGrande.mover() })
+	game.onTick(300, "MOVER", { seniora.mover() })
+	perrosManager.iniciarGeneracionYMovimiento()
+	
+	keyboard.up().onPressDo({carpincho.mover(arriba)})	
+	keyboard.down().onPressDo({carpincho.mover(abajo)})
+	keyboard.left().onPressDo({carpincho.mover(izquierda)})
+	keyboard.right().onPressDo({carpincho.mover(derecha)})
+	
+	game.onCollideDo(carpincho, {enemigo => enemigo.colision(carpincho)})
+	game.onCollideDo(carpincho, {salida => salida.colision()})
+	
 	game.start()
 }
