@@ -6,6 +6,10 @@ import extras.*
 import enemigos.*
 
 program juego {
+	
+	var mujerGrande = new Humano(position = game.at(0, 7))
+	var seniora = new Humano(position = game.at(0, 9))
+	
 	game.title("El carpincho de Nordelta")
 	
 	game.width(15)
@@ -14,13 +18,16 @@ program juego {
 	
 	//game.boardGround("fondo.png")
 	
-	game.addVisual(humano)
+	game.addVisual(salida)
+	game.addVisual(mujerGrande)
+	game.addVisual(seniora)
 	game.addVisual(pasto)
 	game.addVisual(vida)
 	
 	game.addVisual(carpincho)
 	
-	game.onTick(500, "MOVER", { humano.mover() })
+	game.onTick(300, "MOVER", { mujerGrande.mover() })
+	game.onTick(300, "MOVER", { seniora.mover() })
 	perrosManager.iniciarGeneracionYMovimiento()
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
@@ -29,6 +36,7 @@ program juego {
 	keyboard.right().onPressDo({carpincho.mover(derecha)})
 	
 	game.onCollideDo(carpincho, {enemigo => enemigo.colision(carpincho)})
+	game.onCollideDo(carpincho, {salida => salida.colision()})
 	
 	game.start()
 }

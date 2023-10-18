@@ -108,8 +108,8 @@ object perrosManager {
 }
 
 
-object humano {
-	var property position = game.at(0, 7)
+class Humano {
+	var property position
 	const energiaQueSaca = 4000
 	var property estaDeRegreso = false
 	
@@ -153,4 +153,10 @@ object humano {
 
 object auto {
 	
+}
+
+class Charco {
+	method image() {
+		return "charco.png"
+	}
 }

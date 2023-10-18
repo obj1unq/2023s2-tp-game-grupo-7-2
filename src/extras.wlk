@@ -28,3 +28,17 @@ object vida {
 	
 	method colision(personaje) {}
 }
+
+object salida {
+	method position(){
+		return game.at(7, 11)
+	}
+	
+	method image() {
+		return "salida.png"
+	}
+	
+	method colision(){
+		game.stop()
+	}
+}
