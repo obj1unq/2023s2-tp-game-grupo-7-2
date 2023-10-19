@@ -20,7 +20,7 @@ class Cerca {
 
 class CercaHorizontal inherits Cerca{
 	method position(){
-		position = 
+		//position = 
 	}
 	
 	override method image() = "cerca-horizontal.png"
@@ -29,7 +29,7 @@ class CercaHorizontal inherits Cerca{
 
 class CercaVertical inherits Cerca{
 	method position(){
-		position = 
+		//position = 
 	}
 	
 	override method image() = "cerca-vertical.png"
