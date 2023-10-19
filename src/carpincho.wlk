@@ -58,28 +58,16 @@ object carpincho {
 		self.validarMover(direccion)
 		const proxima = direccion.siguiente(self.position())		
 		self.position(proxima)
-		self.cambiarPerfil(direccion)
+		self.perfil(direccion)
 		
 	}
 	
-	method cambiarPerfil(direccion){
-		if (direccion == izquierda || direccion == derecha){
-			self.perfil(direccion)	
-		} else {
-			self.perfil(self.perfil())
-		}
-	}
-	
-	method enfrentarseA(personaje) {
+	method enfrentarseAVisual(personaje) {
 		energia -= personaje.energiaQueSaca()
 		if(not self.tieneEnergiaParaMover()) {
 			game.removeTickEvent("MOVER")
 			game.schedule(3000, {game.stop()})
 		}
-	}
-	
-	method enfrentarseAVisual(personaje) {
-		self.enfrentarseA(personaje)
 	}
 	
 }
