@@ -38,7 +38,7 @@ object salida {
 		return "salida.png"
 	}
 	
-	method colision(){
+	method colision(personaje){
 		game.stop()
 	}
 }

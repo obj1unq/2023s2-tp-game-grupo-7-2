@@ -35,8 +35,7 @@ program juego {
 	keyboard.left().onPressDo({carpincho.mover(izquierda)})
 	keyboard.right().onPressDo({carpincho.mover(derecha)})
 	
-	game.onCollideDo(carpincho, {enemigo => enemigo.colision(carpincho)})
-	game.onCollideDo(carpincho, {salida => salida.colision()})
+	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	
 	game.start()
 }
