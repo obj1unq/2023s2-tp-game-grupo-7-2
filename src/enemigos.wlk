@@ -29,7 +29,6 @@ class Perro {
 		}
 	}
 	
-	
 }
 
 class PerroDomesticado inherits Perro {
@@ -111,7 +110,7 @@ object perrosManager {
 class Humano {
 	var property position
 	const energiaQueSaca = 4000
-	var property estaDeRegreso = false
+	var property estado = estadoDerecha
 	
 	method image() {
 		return "humana.png"
@@ -135,19 +134,43 @@ class Humano {
 	}
 	
 	method proximaDireccion(){
-		if (self.puedeOcupar(derecha.siguiente(self.position())) && not self.estaDeRegreso()) {
-			estaDeRegreso = false
-			return derecha.siguiente(self.position())
+		const proxima = estado.moverse(self.position())
+		if (not self.puedeOcupar(proxima)) {
+			estado = estado.siguienteEstado()
 		}
-		else if (self.puedeOcupar(izquierda.siguiente(self.position()))){
-			estaDeRegreso = true
-			return izquierda.siguiente(self.position())
-		}
-		else{
-			estaDeRegreso = false
-			return derecha.siguiente(self.position())
-		}
+		return proxima
+	}
 	
+	/* 
+	method mover(){
+		const proxima = derecha.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		} else {
+			perrosManager.quitar(self)
+		}
+	}*/
+}
+
+object estadoDerecha {
+	
+	
+	method moverse(position) {
+		return derecha.siguiente(position)
+	}
+	
+	method siguienteEstado() {
+		return estadoIzquierda
+	}
+}
+
+object estadoIzquierda {
+	method moverse(position) {
+		return izquierda.siguiente(position)
+	}
+	
+	method siguienteEstado() {
+		return estadoDerecha
 	}
 }
 
