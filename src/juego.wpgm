@@ -4,6 +4,7 @@ import direcciones.*
 import obstaculos.*
 import extras.*
 import enemigos.*
+import mapa.*
 
 program juego {
 	
@@ -18,17 +19,17 @@ program juego {
 	
 	//game.boardGround("fondo.png")
 	
-	game.addVisual(salida)
-	game.addVisual(mujerGrande)
-	game.addVisual(seniora)
+	//game.addVisual(salida)
+	//game.addVisual(mujerGrande)
+	//game.addVisual(seniora)
 	game.addVisual(pasto)
-	game.addVisual(vida)
 	
-	game.addVisual(carpincho)
+	mapa.generar()
+	
 	
 	game.onTick(300, "MOVER", { mujerGrande.mover() })
 	game.onTick(300, "MOVER", { seniora.mover() })
-	perrosManager.iniciarGeneracionYMovimiento()
+	
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
