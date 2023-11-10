@@ -106,15 +106,27 @@ object perrosManager {
 
 }
 
+object alcoholicaFactory {
+	
+	method nuevo() {
+		return new Humano(position = game.at(0, 7))
+	}
+}
+
+object antiCarpiFactory {
+	method nuevo() {
+		return new Humano(position = game.at(0, 7), image = "humana-anti-carpi.png")
+	}
+}
+
 
 class Humano {
 	var property position
+	var property image = "humana-alcohol.png"
 	const energiaQueSaca = 4000
 	var property estado = estadoDerecha
 	
-	method image() {
-		return "humana.png"
-	}
+
 	
 	method colision(personaje) {
 		personaje.enfrentarseAVisual(self)	
@@ -141,15 +153,42 @@ class Humano {
 		return proxima
 	}
 	
-	/* 
-	method mover(){
-		const proxima = derecha.siguiente(self.position())
-		if(self.puedeOcupar(proxima)) {
-			self.position(proxima)
-		} else {
-			perrosManager.quitar(self)
+
+}
+
+object humanosManager {
+	
+	const generados = #{}
+	const limite = 3
+	
+	const factories = [alcoholicaFactory, antiCarpiFactory]
+	
+	
+	method seleccionarFactory() {
+		return factories.anyOne() 
+	}
+	
+	method iniciarGeneracionYMovimiento() {
+		self.iniciarGeneracion(3)
+		self.iniciarMovimiento()
+	}
+	
+	method iniciarGeneracion(segundos) {
+		game.onTick(segundos * 1000,"HUMANA", {self.generar()})
+	}
+	
+	method iniciarMovimiento() {
+		game.onTick(1000, "MOVER", { generados.forEach({ humana => humana.mover()}) })
+	}
+	
+	method generar() {
+		if(generados.size() < limite ) {
+			const humana = self.seleccionarFactory().nuevo() 		
+			game.addVisual(humana)	
+			generados.add(humana)	
 		}
-	}*/
+	}
+	
 }
 
 object estadoDerecha {

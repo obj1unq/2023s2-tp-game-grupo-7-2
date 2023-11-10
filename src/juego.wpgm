@@ -8,8 +8,6 @@ import mapa.*
 
 program juego {
 	
-	var mujerGrande = new Humano(position = game.at(0, 7))
-	var seniora = new Humano(position = game.at(0, 9))
 	
 	game.title("El carpincho de Nordelta")
 	
@@ -17,18 +15,9 @@ program juego {
 	game.height(12)
 	game.cellSize(70)
 	
-	//game.boardGround("fondo.png")
-	
-	//game.addVisual(salida)
-	//game.addVisual(mujerGrande)
-	//game.addVisual(seniora)
 	game.addVisual(pasto)
 	
 	mapa.generar()
-	
-	
-	game.onTick(300, "MOVER", { mujerGrande.mover() })
-	game.onTick(300, "MOVER", { seniora.mover() })
 	
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	

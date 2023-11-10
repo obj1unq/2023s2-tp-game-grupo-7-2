@@ -20,9 +20,7 @@ object a {
 
 object h {
 	method generar(position) {
-		var seniora = new Humano(position = game.at(0, 9))
-		seniora.position(position)
-		game.addVisual(seniora)
+		humanosManager.iniciarGeneracionYMovimiento()
 	}	
 }
 object p{
