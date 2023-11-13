@@ -13,8 +13,6 @@ object _ {
 object a {
 	method generar(position) {
 		carpincho.position(position)
-		//game.addVisual(pepita)
-		//No agrega el visual para hacerlo al final
 	}		
 }
 
@@ -43,10 +41,10 @@ object s{
 	}		
 }
 
+
 object d{
 	method generar(position) {
-		pasto.position(position)
-		game.addVisual(pasto)
+		game.addVisual(new Pasto(position=position))
 	}		
 }
 
@@ -59,7 +57,7 @@ object mapa {
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[h,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -77,7 +75,7 @@ object mapa {
 				self.generarCelda(x,y)
 			})
 		})
-		game.addVisual(carpincho) //agrego al final por un tema del z index
+		game.addVisual(carpincho) 
 	}
 	
 	method generarCelda(x,y) {

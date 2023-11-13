@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 
 class Perro {
-	var property position = game.at(0, 5)
+	var property position = game.at(0, 4)
 	const energiaQueSaca
 	
 	method image() 

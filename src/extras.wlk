@@ -1,9 +1,9 @@
 import wollok.game.*
 import carpincho.*
 
-object pasto {
+class Pasto {
 	
-	var property position=game.at(0, 0)
+	const property position
 	
 	method image() {
 		return "pasto.png"
