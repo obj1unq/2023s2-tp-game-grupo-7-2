@@ -3,13 +3,10 @@ import carpincho.*
 
 object pasto {
 	
-	method image() {
-		return "patio.png"
-	}
+	var property position=game.at(0, 0)
 	
-	method position() {
-		return game.at(0, 0) 
-		
+	method image() {
+		return "pasto.png"
 	}
 	
 	method colision(personaje) {}

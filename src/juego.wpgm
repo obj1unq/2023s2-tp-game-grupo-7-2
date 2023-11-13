@@ -15,8 +15,6 @@ program juego {
 	game.height(12)
 	game.cellSize(70)
 	
-	game.addVisual(pasto)
-	
 	mapa.generar()
 	
 	

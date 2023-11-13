@@ -43,6 +43,13 @@ object s{
 	}		
 }
 
+object d{
+	method generar(position) {
+		pasto.position(position)
+		game.addVisual(pasto)
+	}		
+}
+
 object mapa {
 	
 	
@@ -57,7 +64,7 @@ object mapa {
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,a,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]	
+		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d]	
 	].reverse() //reverse porque el y crece en el orden inverso
 	
 	
