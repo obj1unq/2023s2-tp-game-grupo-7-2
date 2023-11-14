@@ -23,7 +23,7 @@ object h {
 }
 object p{
 	method generar(position) {
-		perrosManager.iniciarGeneracionYMovimiento()
+		perrosManager.iniciarGeneracionYMovimiento(position)
 	}		
 }
 

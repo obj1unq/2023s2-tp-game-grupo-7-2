@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 
 class Perro {
-	var property position = game.at(0, 4)
+	var property position
 	const energiaQueSaca
 	
 	method image() 
@@ -51,14 +51,14 @@ class PerroCallejero inherits Perro {
 
 object callejeroFactory {
 	
-	method nuevo() {
-		return new PerroCallejero(energiaQueSaca = 100)
+	method nuevo(position) {
+		return new PerroCallejero(energiaQueSaca = 100, position = position)
 	}
 }
 
 object domesticadoFactory {
-	method nuevo() {
-		return new PerroDomesticado(energiaQueSaca = 50)
+	method nuevo(position) {
+		return new PerroDomesticado(energiaQueSaca = 50, position = position)
 	}
 }
 
@@ -73,26 +73,26 @@ object perrosManager {
 		return factories.anyOne() 
 	}
 	
-	method iniciarGeneracionYMovimiento() {
-		self.iniciarGeneracion(2)
+	method iniciarGeneracionYMovimiento(position) {
+		self.iniciarGeneracion(2, position)
 		self.iniciarMovimiento()
 	}
 	
-	method iniciarGeneracion(segundos) {
-		game.onTick(segundos * 1000,"PERROS", {self.generar()})
+	method iniciarGeneracion(segundos, position) {
+		game.onTick(segundos * 1000,"PERROS", {self.generar(position)})
 	}
 	
-	method cambiarGeneracion(segundos) {
+	method cambiarGeneracion(segundos, position) {
 		game.removeTickEvent("PERROS")
-		self.iniciarGeneracion(segundos)
+		self.iniciarGeneracion(segundos, position)
 	}
 	
 	method iniciarMovimiento() {
 		game.onTick(1000, "MOVER", { generados.forEach({ perro => perro.mover()}) })
 	}
 	
-	method generar() {
-		const perro = self.seleccionarFactory().nuevo() 		
+	method generar(position) {
+		const perro = self.seleccionarFactory().nuevo(position) 		
 		game.addVisual(perro)	
 		generados.add(perro)
 		
@@ -124,7 +124,6 @@ class Humano {
 	var property position
 	var property image = "humana-alcohol.png"
 	const energiaQueSaca = 4000
-	var property estado = estadoDerecha
 	
 
 	
@@ -140,17 +139,14 @@ class Humano {
 		return tablero.pertenece(posicion)
 	}
 	
-	method mover(){
-		const proxima = self.proximaDireccion()
-		self.position(proxima)
-	}
 	
-	method proximaDireccion(){
-		const proxima = estado.moverse(self.position())
-		if (not self.puedeOcupar(proxima)) {
-			estado = estado.siguienteEstado()
+	method mover(){
+		const proxima = derecha.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		} else {
+			humanosManager.quitar(self)
 		}
-		return proxima
 	}
 	
 
@@ -189,29 +185,13 @@ object humanosManager {
 		}
 	}
 	
+	method quitar(perro) {
+		generados.remove(perro)
+		game.removeVisual(perro)
+	}
+	
 }
 
-object estadoDerecha {
-	
-	
-	method moverse(position) {
-		return derecha.siguiente(position)
-	}
-	
-	method siguienteEstado() {
-		return estadoIzquierda
-	}
-}
-
-object estadoIzquierda {
-	method moverse(position) {
-		return izquierda.siguiente(position)
-	}
-	
-	method siguienteEstado() {
-		return estadoDerecha
-	}
-}
 
 object auto {
 	
