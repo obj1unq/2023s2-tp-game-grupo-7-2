@@ -20,8 +20,8 @@ class Enemigo {
 		return tablero.pertenece(posicion)
 	}
 	
-	method mover(){
-		const proxima = derecha.siguiente(self.position())
+	method mover(direccion){
+		const proxima = direccion.siguiente(self.position())
 		if(self.puedeOcupar(proxima)) {
 			self.position(proxima)
 		} else {
@@ -77,9 +77,9 @@ class EnemigosManager {
 		return factories.anyOne() 
 	}
 	
-	method iniciarGeneracionYMovimiento(position) {
-		self.iniciarGeneracion(2, position)
-		self.iniciarMovimiento()
+	method iniciarGeneracionYMovimiento(segundos, position, direccion) {
+		self.iniciarGeneracion(segundos, position)
+		self.iniciarMovimiento(direccion)
 	}
 	
 	method iniciarGeneracion(segundos, position) {
@@ -91,8 +91,8 @@ class EnemigosManager {
 		self.iniciarGeneracion(segundos, position)
 	}
 	
-	method iniciarMovimiento() {
-		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover()}) })
+	method iniciarMovimiento(direccion) {
+		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
 	}
 	
 }
@@ -159,7 +159,42 @@ object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, a
 }
 
 
-object auto {
+class Auto inherits Enemigo {
+	
+	override method quitarEnemigo() {
+		autosManager.quitar(self)
+	}
+	
+	override method colision(personaje) {
+		super(personaje)
+		autosManager.quitar(self)
+		personaje.position(game.at(personaje.position().x()-4, personaje.position().y()))	
+	}
+}
+
+object autoFactory {
+	method nuevo(position) {
+		return new Auto(position = position, image = "auto.gif", energiaQueSaca = 200)
+	}
+}
+
+object autosManager inherits EnemigosManager(factories = [autoFactory]) {
+	
+	const limite = 5	
+	
+	override method generar(position) {
+		if(generados.size() < limite ) {
+			const humana = self.seleccionarFactory().nuevo(position) 		
+			game.addVisual(humana)	
+			generados.add(humana)
+			
+		}
+	}
+	
+	method quitar(auto) {
+		generados.remove(auto)
+		game.removeVisual(auto)
+	}
 	
 }
 

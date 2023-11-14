@@ -13,6 +13,54 @@ class Pasto {
 	
 }
 
+class Asfalto {
+	
+	const property position
+	
+	method image() {
+		return "asfalto.png"
+	}
+	
+	method colision(personaje) {}
+	
+}
+
+class Rio {
+	
+	const property position
+	
+	method image() {
+		return "rio.png"
+	}
+	
+	method colision(personaje) {}
+	
+}
+
+class RioBotella {
+	
+	const property position
+	
+	method image() {
+		return "rio-botella.png"
+	}
+	
+	method colision(personaje) {}
+	
+}
+
+class Tronco {
+	
+	const property position
+	
+	method image() {
+		return "tronco.png"
+	}
+	
+	method colision(personaje) {}
+	
+}
+
 object vida {
 	var property position=game.at(0, game.height() - 1)
 	

@@ -2,11 +2,11 @@ import wollok.game.*
 import carpincho.*
 import extras.*
 import enemigos.*
+import direcciones.*
 
 object _ {
 	
 	method generar(position) {
-		//El vacio no agrega nada
 	}	
 }
 
@@ -18,12 +18,12 @@ object a {
 
 object h {
 	method generar(position) {
-		humanosManager.iniciarGeneracionYMovimiento(position)
+		humanosManager.iniciarGeneracionYMovimiento(3, position, derecha)
 	}	
 }
 object p{
 	method generar(position) {
-		perrosManager.iniciarGeneracionYMovimiento(position)
+		perrosManager.iniciarGeneracionYMovimiento(2, position, derecha)
 	}		
 }
 
@@ -48,19 +48,52 @@ object d{
 	}		
 }
 
+object f{
+	method generar(position) {
+		game.addVisual(new Asfalto(position=position))
+	}		
+}
+
+object fg{
+	
+	method generar(position) {
+		game.addVisual(new Asfalto(position=position))
+		autosManager.iniciarGeneracionYMovimiento(4, position, izquierda)
+	}		
+}
+
+object r{
+	method generar(position) {
+		game.addVisual(new Rio(position=position))
+	}		
+}
+
+object l{
+	method generar(position) {
+		game.addVisual(new RioBotella(position=position))
+	}		
+}
+
+object ln{
+	method generar(position) {
+		game.addVisual(new RioBotella(position=position))
+		game.addVisual(new Tronco(position=position))
+	}		
+}
+
 object mapa {
 	
 	
 	var celdas = [
 		[v,_,_,_,_,_,_,s,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		[l,r,r,r,l,r,ln,r,l,r,r,r,l,r,l],
+		[r,r,l,r,r,r,l,l,r,l,r,l,r,r,r],
 		[h,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
+		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[_,_,_,_,_,_,a,_,_,_,_,_,_,_,_],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d]	
 	].reverse() //reverse porque el y crece en el orden inverso
