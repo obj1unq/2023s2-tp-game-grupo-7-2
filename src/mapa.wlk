@@ -18,7 +18,7 @@ object a {
 
 object h {
 	method generar(position) {
-		humanosManager.iniciarGeneracionYMovimiento()
+		humanosManager.iniciarGeneracionYMovimiento(position)
 	}	
 }
 object p{
