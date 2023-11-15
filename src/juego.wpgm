@@ -8,12 +8,13 @@ import mapa.*
 
 program juego {
 	
-	
+	const soundGameplay = game.sound("gameplay.mp3")
 	game.title("El carpincho de Nordelta")
 	
 	game.width(15)
 	game.height(12)
 	game.cellSize(70)
+	soundGameplay.shouldLoop(true)
 	
 	mapa.generar()
 	
@@ -24,6 +25,6 @@ program juego {
 	keyboard.right().onPressDo({carpincho.mover(derecha)})
 	
 	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
-	
+	game.schedule(500, {soundGameplay.play()})
 	game.start()
 }

@@ -66,6 +66,8 @@ object carpincho {
 		energia -= personaje.energiaQueSaca()
 		if(not self.tieneEnergiaParaMover()) {
 			game.removeTickEvent("MOVER")
+			const soundGameover = game.sound("gameover.mp3")
+			game.schedule(500, {soundGameover.play()})
 			game.schedule(3000, {game.stop()})
 		}
 	}
