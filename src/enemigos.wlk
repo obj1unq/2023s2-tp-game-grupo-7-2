@@ -3,17 +3,14 @@ import direcciones.*
 
 class Enemigo {
 	var property position
-	const energiaQueSaca
+	const property energiaQueSaca
 	const property image
 	 
 	method quitarEnemigo()
+	method accionColision(personaje) {}
 	
 	method colision(personaje) {
 		personaje.enfrentarseAVisual(self)
-	}
-	
-	method energiaQueSaca() {
-		return energiaQueSaca
 	}
 	
 	method puedeOcupar(posicion) {
@@ -86,14 +83,16 @@ class EnemigosManager {
 		game.onTick(segundos * 1000,"ENEMIGOS", {self.generar(position)})
 	}
 	
+	method iniciarMovimiento(direccion) {
+		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
+	}
+	
 	method cambiarGeneracion(segundos, position) {
 		game.removeTickEvent("ENEMIGOS")
 		self.iniciarGeneracion(segundos, position)
 	}
 	
-	method iniciarMovimiento(direccion) {
-		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
-	}
+	
 	
 }
 
@@ -184,9 +183,9 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 	
 	override method generar(position) {
 		if(generados.size() < limite ) {
-			const humana = self.seleccionarFactory().nuevo(position) 		
-			game.addVisual(humana)	
-			generados.add(humana)
+			const auto = self.seleccionarFactory().nuevo(position) 		
+			game.addVisual(auto)	
+			generados.add(auto)
 			
 		}
 	}

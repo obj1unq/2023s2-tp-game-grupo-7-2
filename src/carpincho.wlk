@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 
 object carpincho {
-	var position = game.at(2, 2)
+	var position = game.at(0, 0)
 	var energia = 1000
 	var property perfil = derecha
 	
@@ -70,6 +70,10 @@ object carpincho {
 			game.schedule(500, {soundGameover.play()})
 			game.schedule(3000, {game.stop()})
 		}
+	}
+	
+	method moverConObjeto(objeto) {
+		self.position(objeto.position())
 	}
 	
 }

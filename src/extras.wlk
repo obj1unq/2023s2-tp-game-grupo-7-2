@@ -1,86 +1,140 @@
 import wollok.game.*
 import carpincho.*
+import direcciones.*
 
-class Pasto {
+class Extra {
+	var property position
 	
-	const property position
+	method image()
 	
-	method image() {
+	method colision(personaje) {}
+	method accionColision(personaje) {}
+}
+
+class Pasto inherits Extra {
+
+	
+	override method image() {
 		return "pasto.png"
 	}
 	
-	method colision(personaje) {}
-	
 }
 
-class Asfalto {
+class Asfalto inherits Extra {
 	
-	const property position
-	
-	method image() {
+	override method image() {
 		return "asfalto.png"
 	}
 	
-	method colision(personaje) {}
-	
 }
 
-class Rio {
+class Rio inherits Extra {
 	
-	const property position
+	const property energiaQueSaca = 50
 	
-	method image() {
+	override method image() {
 		return "rio.png"
 	}
 	
-	method colision(personaje) {}
+	
+	override method accionColision(personaje) {
+		personaje.enfrentarseAVisual(self)
+	}
 	
 }
 
-class RioBotella {
+class RioBotella inherits Rio {
 	
-	const property position
 	
-	method image() {
+	override method image() {
 		return "rio-botella.png"
 	}
 	
-	method colision(personaje) {}
 	
 }
 
-class Tronco {
+class Tronco inherits Extra {
 	
-	const property position
 	
-	method image() {
+	override method image() {
 		return "tronco.png"
 	}
 	
-	method colision(personaje) {}
+	override method colision(personaje) {
+		personaje.moverConObjeto(self)
+	}
+	
+	method puedeOcupar(posicion) {
+		return tablero.pertenece(posicion)
+	}
+	
+	method mover(direccion){
+		const proxima = direccion.siguiente(self.position())
+		if(self.puedeOcupar(proxima)) {
+			self.position(proxima)
+		} else {
+			self.quitarTronco()
+		}
+	}
+	
+	method quitarTronco() {
+		troncosManager.quitar(self)
+	}
+}
+
+object troncosManager {
+	const generados = #{}
+
+	method iniciarGeneracionYMovimiento(segundos, position, direccion) {
+		self.iniciarGeneracion(segundos, position)
+		self.iniciarMovimiento(direccion)
+	}
+	
+	method iniciarGeneracion(segundos, position) {
+		game.onTick(segundos * 1000,"EXTRAS", {self.generar(position)})
+	}
+	
+	method iniciarMovimiento(direccion) {
+		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
+	}
+	
+	method generar(position) {
+		const tronco = new Tronco(position = position) 		
+		game.addVisual(tronco)	
+		generados.add(tronco)
+		
+	}
+	
+	method quitar(tronco) {
+		generados.remove(tronco)
+		game.removeVisual(tronco)
+	}
+}
+
+
+
+class Vereda inherits Extra {
+	
+	
+	override method image() {
+		return "vereda.png"
+	}
 	
 }
 
-object vida {
-	var property position=game.at(0, game.height() - 1)
+object vida inherits Extra(position = game.at(0, 0)) {
 	
 	
-	method image() {
+	override method image() {
 		return return "vida-" + carpincho.vidaVisual() + ".png"
 	}
 	
-	method colision(personaje) {}
 }
 
-object salida {
-	var property position=game.at(7, 11)
+object salida inherits Extra(position = game.at(0, 0)){
 
 	
-	method image() {
+	override method image() {
 		return "salida.png"
-	}
-	
-	method colision(personaje){
-		game.stop()
 	}
 }
