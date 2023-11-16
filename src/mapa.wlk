@@ -31,8 +31,9 @@ object p{
 
 object v{
 	method generar(position) {
+		game.addVisual(new Tierra(position=position))
 		vida.position(position)
-		game.addVisual(vida)
+		
 	}		
 }
 
@@ -96,16 +97,36 @@ object k{
 	}
 }
 
+object n{
+	method generar(position) {
+		game.addVisual(new Tierra(position=position))
+	}
+}
+
+object m{
+	method generar(position) {
+		game.addVisual(new Tierra(position=position))
+		game.addVisual(new Rocas(position=position))
+	}
+}
+
+object gn{
+	method generar(position) {
+		game.addVisual(new Tierra(position=position))
+		gansosManager.iniciarGeneracionYMovimiento(3, position, izquierda)
+	}
+}
+
 
 object mapa {
 	
 	
 	var celdas = [
-		[v,_,_,_,_,_,_,s,_,_,_,_,_,_,_],
+		[v,n,n,m,m,m,m,s,m,m,m,m,m,m,m],
+		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
 		[l,r,r,r,l,r,l,r,l,r,r,r,l,r,ln],
 		[rn,r,l,r,r,r,l,l,r,l,r,l,r,r,r],
 		[h,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
@@ -124,6 +145,7 @@ object mapa {
 				self.generarCelda(x,y)
 			})
 		})
+		game.addVisual(vida)
 		game.addVisual(carpincho) 
 	}
 	

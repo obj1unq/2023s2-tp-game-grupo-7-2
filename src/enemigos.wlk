@@ -93,7 +93,6 @@ class EnemigosManager {
 	}
 	
 	
-	
 }
 
 object perrosManager inherits EnemigosManager(factories = [callejeroFactory, domesticadoFactory]) {
@@ -193,6 +192,39 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 	method quitar(auto) {
 		generados.remove(auto)
 		game.removeVisual(auto)
+	}
+	
+}
+
+class Ganso inherits Enemigo {
+	
+	override method quitarEnemigo() {
+		gansosManager.quitar(self)
+	}
+}
+
+object gansoFactory {
+	method nuevo(position) {
+		return new Ganso(position = position, image = "ganso.png", energiaQueSaca = 200)
+	}
+}
+
+object gansosManager inherits EnemigosManager(factories = [gansoFactory]) {
+	
+	const limite = 5	
+	
+	override method generar(position) {
+		if(generados.size() < limite ) {
+			const ganso = self.seleccionarFactory().nuevo(position) 		
+			game.addVisual(ganso)	
+			generados.add(ganso)
+			
+		}
+	}
+	
+	method quitar(ganso) {
+		generados.remove(ganso)
+		game.removeVisual(ganso)
 	}
 	
 }

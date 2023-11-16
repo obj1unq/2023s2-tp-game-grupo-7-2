@@ -20,6 +20,24 @@ class Pasto inherits Extra {
 	
 }
 
+class Tierra inherits Extra {
+
+	
+	override method image() {
+		return "tierra.png"
+	}
+	
+}
+
+class Rocas inherits Extra {
+
+	
+	override method image() {
+		return "rocas.png"
+	}
+	
+}
+
 class Asfalto inherits Extra {
 	
 	override method image() {
@@ -29,7 +47,7 @@ class Asfalto inherits Extra {
 }
 
 class Rio inherits Extra {
-	const property energiaQueSaca = 50
+	const property energiaQueSaca = 10
 	
 	override method image() {
 		return "rio.png"
@@ -92,7 +110,7 @@ object troncosManager {
 	}
 	
 	method iniciarMovimiento(direccion) {
-		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
+		game.onTick(1000, "MOVER", { generados.forEach({ extra => extra.mover(direccion)}) })
 	}
 	
 	method generar(position) {
