@@ -28,24 +28,36 @@ class Asfalto {
 class Rio {
 	
 	const property position
+	const energiaQueSaca
 	
 	method image() {
 		return "rio.png"
 	}
 	
-	method colision(personaje) {}
+	method colision(personaje) {
+		personaje.enfrentarseAVisual(self)
+	}
+	
+	method energiaQueSaca() {
+		return energiaQueSaca
+	}
 	
 }
 
 class RioBotella {
 	
 	const property position
+	const energiaQueSaca
 	
 	method image() {
 		return "rio-botella.png"
 	}
 	
 	method colision(personaje) {}
+	
+	method energiaQueSaca() {
+		return energiaQueSaca
+	}
 	
 }
 

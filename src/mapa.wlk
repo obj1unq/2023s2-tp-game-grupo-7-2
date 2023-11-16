@@ -64,19 +64,19 @@ object fg{
 
 object r{
 	method generar(position) {
-		game.addVisual(new Rio(position=position))
+		game.addVisual(new Rio(position=position, energiaQueSaca=100 ))
 	}		
 }
 
 object l{
 	method generar(position) {
-		game.addVisual(new RioBotella(position=position))
+		game.addVisual(new RioBotella(position=position, energiaQueSaca=100))
 	}		
 }
 
 object ln{
 	method generar(position) {
-		game.addVisual(new RioBotella(position=position))
+		game.addVisual(new RioBotella(position=position, energiaQueSaca=100))
 		game.addVisual(new Tronco(position=position))
 	}		
 }
