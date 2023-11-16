@@ -29,14 +29,13 @@ class Asfalto inherits Extra {
 }
 
 class Rio inherits Extra {
-	
 	const property energiaQueSaca = 50
 	
 	override method image() {
 		return "rio.png"
 	}
 	
-	
+
 	override method accionColision(personaje) {
 		personaje.enfrentarseAVisual(self)
 	}
@@ -45,11 +44,9 @@ class Rio inherits Extra {
 
 class RioBotella inherits Rio {
 	
-	
 	override method image() {
 		return "rio-botella.png"
 	}
-	
 	
 }
 
