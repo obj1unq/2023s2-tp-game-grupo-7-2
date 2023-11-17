@@ -5,16 +5,17 @@ import obstaculos.*
 import extras.*
 import enemigos.*
 import mapa.*
+import sonidos.*
 
 program juego {
 	
-	const soundGameplay = game.sound("gameplay.mp3")
+	sonidoGameplay.reproducir()
+	
 	game.title("El carpincho de Nordelta")
 	
 	game.width(15)
 	game.height(12)
 	game.cellSize(70)
-	soundGameplay.shouldLoop(true)
 	
 	mapa.generar()
 	
@@ -26,6 +27,5 @@ program juego {
 	
 	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
-	game.schedule(500, {soundGameplay.play()})
 	game.start()
 }

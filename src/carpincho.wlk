@@ -1,5 +1,6 @@
 import wollok.game.*
 import direcciones.*
+import sonidos.*
 
 object carpincho {
 	var position = game.at(0, 0)
@@ -66,8 +67,7 @@ object carpincho {
 		energia -= personaje.energiaQueSaca()
 		if(not self.tieneEnergiaParaMover()) {
 			game.removeTickEvent("MOVER")
-			const soundGameover = game.sound("gameover.mp3")
-			game.schedule(500, {soundGameover.play()})
+			sonidoGameover.reproducir()
 			game.schedule(3000, {game.stop()})
 		}
 	}
