@@ -4,7 +4,7 @@ import sonidos.*
 
 object carpincho {
 	var position = game.at(0, 0)
-	var energia = 1000
+	var energia = 2000
 	var property perfil = derecha
 	
 	method position() {
