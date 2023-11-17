@@ -46,6 +46,14 @@ class Asfalto inherits Extra {
 	
 }
 
+class Piso inherits Extra {
+	
+	override method image() {
+		return "piso.png"
+	}
+	
+}
+
 class Rio inherits Extra {
 	const property energiaQueSaca = 10
 	
@@ -150,6 +158,6 @@ object salida inherits Extra(position = game.at(0, 0)){
 
 	
 	override method image() {
-		return "salida.png"
+		return "familia-carpincho.png"
 	}
 }

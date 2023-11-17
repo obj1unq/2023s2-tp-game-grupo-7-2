@@ -42,7 +42,30 @@ class Perro inherits Enemigo {
 	
 }
 
+class PerroIzq inherits Enemigo {
+	 
+	
+	override method colision(personaje) {
+		super(personaje)
+		perrosManagerIzquierda.quitar(self)
+	}
+	
+
+	override method quitarEnemigo() {
+		perrosManagerIzquierda.quitar(self)
+	}
+	
+}
+
 class PerroCallejero inherits Perro {
+	
+	override method colision(personaje) {
+		super(personaje)
+		personaje.position(game.at(personaje.position().x(), personaje.position().y()- 3))	
+	}
+}
+
+class PerroCallejeroIzq inherits PerroIzq {
 	
 	override method colision(personaje) {
 		super(personaje)
@@ -60,6 +83,19 @@ object callejeroFactory {
 object domesticadoFactory {
 	method nuevo(position) {
 		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png")
+	}
+}
+
+object callejeroIzquierdaFactory {
+	
+	method nuevo(position) {
+		return new PerroCallejeroIzq(energiaQueSaca = 100, position = position, image = "perro-callejero.png")
+	}
+}
+
+object domesticadoIzquierdaFactory {
+	method nuevo(position) {
+		return new PerroIzq(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png")
 	}
 }
 
@@ -108,6 +144,24 @@ object perrosManager inherits EnemigosManager(factories = [callejeroFactory, dom
 	method quitar(perro) {
 		generados.remove(perro)
 		game.removeVisual(perro)
+	}
+	
+
+}
+
+object perrosManagerIzquierda inherits EnemigosManager(factories = [callejeroIzquierdaFactory, domesticadoIzquierdaFactory]) {
+	
+	
+	override method generar(position) {
+		const perroIzq = self.seleccionarFactory().nuevo(position) 		
+		game.addVisual(perroIzq)	
+		generados.add(perroIzq)
+		
+	}
+	
+	method quitar(perroIzq) {
+		generados.remove(perroIzq)
+		game.removeVisual(perroIzq)
 	}
 	
 

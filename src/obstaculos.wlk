@@ -7,33 +7,14 @@ object charco {
 	
 }
 
-object tronco {
-	
-}
 
 class Cerca {
-	var property position
+	var property position = game.at(0, 0)
 	
-	method image()
+	method colision(personaje) {}
+	method accionColision(personaje) {}
 	
-}
-
-class CercaHorizontal inherits Cerca{
-	method position(){
-		//position = 
-	}
-	
-	override method image() = "cerca-horizontal.png"
+	method image() = "cerca.png"
 	
 }
-
-class CercaVertical inherits Cerca{
-	method position(){
-		//position = 
-	}
-	
-	override method image() = "cerca-vertical.png"
-	
-}
-
 

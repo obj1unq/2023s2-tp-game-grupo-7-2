@@ -3,6 +3,7 @@ import carpincho.*
 import extras.*
 import enemigos.*
 import direcciones.*
+import obstaculos.*
 
 object _ {
 	
@@ -19,6 +20,7 @@ object da {
 
 object h {
 	method generar(position) {
+		game.addVisual(new Piso(position=position))
 		humanosManager.iniciarGeneracionYMovimiento(3, position, derecha)
 	}	
 }
@@ -29,9 +31,16 @@ object p{
 	}		
 }
 
+object pi{
+	method generar(position) {
+		game.addVisual(new Vereda(position=position))
+		perrosManagerIzquierda.iniciarGeneracionYMovimiento(2, position, izquierda)
+	}		
+}
+
 object v{
 	method generar(position) {
-		game.addVisual(new Tierra(position=position))
+		game.addVisual(new Pasto(position=position))
 		vida.position(position)
 		
 	}		
@@ -40,7 +49,9 @@ object v{
 object s{
 	method generar(position) {
 		salida.position(position)
+		game.addVisual(new Pasto(position=position))
 		game.addVisual(salida)
+		
 	}		
 }
 
@@ -105,8 +116,8 @@ object n{
 
 object m{
 	method generar(position) {
-		game.addVisual(new Tierra(position=position))
-		game.addVisual(new Rocas(position=position))
+		game.addVisual(new Pasto(position=position))
+		game.addVisual(new Cerca(position=position))
 	}
 }
 
@@ -117,21 +128,27 @@ object gn{
 	}
 }
 
+object q {
+	method generar(position) {
+		game.addVisual(new Piso(position=position))
+	}
+}
+
 
 object mapa {
 	
 	
 	var celdas = [
-		[v,n,n,m,m,m,m,s,m,m,m,m,m,m,m],
+		[v,d,d,m,m,m,m,s,m,m,m,m,m,m,m],
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
 		[l,r,r,r,l,r,l,r,l,r,r,r,l,r,ln],
 		[rn,r,l,r,r,r,l,l,r,l,r,l,r,r,r],
-		[h,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		[h,q,q,q,q,q,q,q,q,q,q,q,q,q,q],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
-		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
+		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,pi],
 		[d,d,d,d,d,d,d,d,da,d,d,d,d,d,d]	
 	].reverse() //reverse porque el y crece en el orden inverso
 	

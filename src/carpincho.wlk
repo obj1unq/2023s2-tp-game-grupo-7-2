@@ -67,8 +67,9 @@ object carpincho {
 		energia -= personaje.energiaQueSaca()
 		if(not self.tieneEnergiaParaMover()) {
 			game.removeTickEvent("MOVER")
-			sonidoGameover.reproducir()
 			game.schedule(3000, {game.stop()})
+			sonidoGameover.reproducir()
+			
 		}
 	}
 	
