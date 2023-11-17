@@ -1,7 +1,20 @@
 import wollok.game.*
 import carpincho.*
 
-
+object pasto {
+	
+	method image() {
+		return "patio.png"
+	}
+	
+	method position() {
+		return game.at(0, 0) 
+		
+	}
+	
+	method colision(personaje) {}
+	
+}
 
 object vida {
 	method image() {
@@ -9,40 +22,23 @@ object vida {
 	}
 	
 	method position() {
-		return game.at(0, game.height() - 2) 
+		return game.at(0, game.height() - 1) 
 		
 	}
 	
 	method colision(personaje) {}
 }
 
-class Salida {
-	const property position
+object salida {
+	method position(){
+		return game.at(7, 11)
+	}
 	
 	method image() {
-		return "topDoor-closed.png"
+		return "salida.png"
 	}
 	
 	method colision(){
 		game.stop()
 	}
 }
-
-
-class Muro {
-	const property position
-	const property image = "muro.png"
-	
-	method solido() {
-		return true
-	}
-	
-}
-
-class Negro{
-		const property position
-		const property image = "black.png"
-	
-}
-
-

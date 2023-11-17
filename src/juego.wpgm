@@ -4,7 +4,6 @@ import direcciones.*
 import obstaculos.*
 import extras.*
 import enemigos.*
-import mapa.*
 
 program juego {
 	
@@ -13,29 +12,23 @@ program juego {
 	
 	game.title("El carpincho de Nordelta")
 	
-	mapa.generar()
-	
-	game.width(17)
-	game.height(16)
-	game.cellSize(50)
-	
-	
+	game.width(15)
+	game.height(12)
+	game.cellSize(70)
 	
 	//game.boardGround("fondo.png")
 	
-	
+	game.addVisual(salida)
 	game.addVisual(mujerGrande)
 	game.addVisual(seniora)
+	game.addVisual(pasto)
 	game.addVisual(vida)
 	
+	game.addVisual(carpincho)
 	
-	
-	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	game.onTick(300, "MOVER", { mujerGrande.mover() })
 	game.onTick(300, "MOVER", { seniora.mover() })
 	perrosManager.iniciarGeneracionYMovimiento()
-	
-	
 	
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
