@@ -1,14 +1,25 @@
 import wollok.game.*
 import direcciones.*
 
+	object 	moviendose {
+	method puedeMover() {
+		return true
+	}
+	
+
+}
+
 object carpincho {
 	var position = game.at(2, 2)
 	var energia = 1000
 	var property perfil = derecha
+	var property estado = moviendose
 	
 	method position() {
 		return position
 	}
+	
+
 
 	method position(_position) {
 		position = _position
@@ -39,13 +50,17 @@ object carpincho {
 
 	}
 	
-	method puedeOcupar(posicion) {
+	method pertenece(posicion) {
 		return tablero.pertenece(posicion)
 	}
 	
+		method puedeOcupar(posicion) {
+		return tablero.puedeOcupar(posicion) 
+	}
+
 	method sePuedeMover(direccion) {
 		const proxima = direccion.siguiente(self.position())
-		return self.puedeOcupar(proxima) and self.tieneEnergiaParaMover()
+		return self.puedeOcupar(proxima) and self.estado().puedeMover()
 	}
 	
 	method validarMover(direccion) {
@@ -82,4 +97,7 @@ object carpincho {
 		self.enfrentarseA(personaje)
 	}
 	
+
 }
+
+
