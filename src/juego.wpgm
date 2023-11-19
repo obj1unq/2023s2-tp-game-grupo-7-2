@@ -27,5 +27,6 @@ program juego {
 	
 	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
+	
 	game.start()
 }
