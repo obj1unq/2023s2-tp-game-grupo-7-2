@@ -62,6 +62,13 @@ object d{
 	}		
 }
 
+object dv{
+	method generar(position) {
+		game.addVisual(new Pasto(position=position))
+
+	}		
+}
+
 object f{
 	method generar(position) {
 		game.addVisual(new Asfalto(position=position))
@@ -139,7 +146,7 @@ object mapa {
 	
 	
 	var celdas = [
-		[v,d,d,m,m,m,m,s,m,m,m,m,m,m,m],
+		[v,dv,dv,m,m,m,m,s,m,m,m,m,m,m,m],
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
 		[l,r,r,r,l,r,l,r,l,r,r,r,l,r,ln],
 		[rn,r,l,r,r,r,l,l,r,l,r,l,r,r,r],

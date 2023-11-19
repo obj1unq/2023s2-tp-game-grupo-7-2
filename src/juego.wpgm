@@ -6,6 +6,7 @@ import extras.*
 import enemigos.*
 import mapa.*
 import sonidos.*
+import elementosPoder.*
 
 program juego {
 	
@@ -24,9 +25,12 @@ program juego {
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
 	keyboard.left().onPressDo({carpincho.mover(izquierda)})
 	keyboard.right().onPressDo({carpincho.mover(derecha)})
+	keyboard.x().onPressDo({carpincho.activarSuperPoder()})
 	
 	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
+	
+	game.onTick(4000, "MATIENZO", { elementosMateManager.generar()})
 	
 	game.start()
 }

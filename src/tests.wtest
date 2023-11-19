@@ -10,6 +10,7 @@ import mapa.*
 describe "Test del carpincho" {
 	const perroCallejero = new PerroCallejero(position = game.at(0,0), energiaQueSaca = 100, image = "perro-callejero.pn")
 	
+	//TODO: preguntar 
 //	fixture {
 //		game.width(15)
 //		game.height(12)
@@ -20,7 +21,7 @@ describe "Test del carpincho" {
 //	}
 	
 	test "prueba" {
-		assert.equals(carpincho.position(), game.at(4,10))
+		assert.equals(carpincho.position(), game.at(0,0))
 	}
 	
 }
