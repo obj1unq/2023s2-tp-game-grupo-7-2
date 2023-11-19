@@ -1,6 +1,26 @@
+import wollok.game.*
+import carpincho.*
+import direcciones.*
+import obstaculos.*
+import extras.*
+import enemigos.*
+import mapa.*
 
-test "testX" {
 
-	assert.that(true)
-
+describe "Test del carpincho" {
+	const perroCallejero = new PerroCallejero(position = game.at(0,0), energiaQueSaca = 100, image = "perro-callejero.pn")
+	
+//	fixture {
+//		game.width(15)
+//		game.height(12)
+//		game.cellSize(70)
+//		
+//		mapa.generar()
+//		game.start()
+//	}
+	
+	test "prueba" {
+		assert.equals(carpincho.position(), game.at(4,10))
+	}
+	
 }

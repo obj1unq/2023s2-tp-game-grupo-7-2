@@ -61,7 +61,11 @@ class PerroCallejero inherits Perro {
 	
 	override method colision(personaje) {
 		super(personaje)
-		personaje.position(game.at(personaje.position().x(), personaje.position().y()- 3))	
+		personaje.position(game.at(personaje.position().x(), personaje.position().y() - self.efectoDeEnfrentamiento(personaje.position())))	
+	}
+	
+	method efectoDeEnfrentamiento(posicionPersonaje) {
+		return if(posicionPersonaje.x() >= 3) 3 else posicionPersonaje.x()
 	}
 }
 
@@ -69,7 +73,11 @@ class PerroCallejeroIzq inherits PerroIzq {
 	
 	override method colision(personaje) {
 		super(personaje)
-		personaje.position(game.at(personaje.position().x(), personaje.position().y()-3))	
+		personaje.position(game.at(personaje.position().x(), personaje.position().y() - self.efectoDeEnfrentamiento(personaje.position())))	
+	}
+	
+	method efectoDeEnfrentamiento(posicionPersonaje) {
+		return if(posicionPersonaje.y() >= 3) 3 else posicionPersonaje.y()
 	}
 }
 
@@ -220,7 +228,11 @@ class Auto inherits Enemigo {
 	override method colision(personaje) {
 		super(personaje)
 		autosManager.quitar(self)
-		personaje.position(game.at(personaje.position().x()-4, personaje.position().y()))	
+		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))	
+	}
+	
+	method efectoDeEnfrentamiento(posicionPersonaje) {
+		return if(posicionPersonaje.x() >= 4) 4 else posicionPersonaje.x()
 	}
 }
 
