@@ -5,23 +5,36 @@ import obstaculos.*
 import extras.*
 import enemigos.*
 import mapa.*
-
+import elementosPoder.*
 
 describe "Test del carpincho" {
-	const perroCallejero = new PerroCallejero(position = game.at(0,0), energiaQueSaca = 100, image = "perro-callejero.pn")
 	
-	//TODO: preguntar 
-//	fixture {
-//		game.width(15)
-//		game.height(12)
-//		game.cellSize(70)
-//		
-//		mapa.generar()
-//		game.start()
-//	}
+	const perroCallejero = new PerroCallejero(position = game.at(0, 0), energiaQueSaca = 100, image = "perro-callejero.png")
 	
-	test "prueba" {
-		assert.equals(carpincho.position(), game.at(0,0))
+	test "position inicial del carpincho" {
+		assert.equals(game.at(0,0), carpincho.position())
 	}
 	
+	test "vida del carpincho sin recibir daños" {
+		assert.equals(1000, carpincho.vidaVisual())
+	}
+	
+	test "recolectar elementos y tiene suficientes para su superpoder" {
+		carpincho.agarrarElemento(mate)
+		carpincho.agarrarElemento(yerba)
+		carpincho.agarrarElemento(termo)
+		assert.that(carpincho.tieneElementosNecesariosParaSuperPoder())
+	}
+	
+	test "recolectar elementos y no tiene suficientes para su superpoder" {
+		carpincho.agarrarElemento(mate)
+		carpincho.agarrarElemento(yerba)
+		assert.notThat(carpincho.tieneElementosNecesariosParaSuperPoder())
+	}
+	
+	test "al enfrentarse con un perro callejero lo lanza 3 posiciones y le quita 100 de vida" {
+		assert.equals(100, perroCallejero.energiaQueSaca())
+		assert.equals(3, perroCallejero.efectoDeEnfrentamiento(game.at(5, 5)))
+	}
 }
+
