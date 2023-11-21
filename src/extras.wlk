@@ -1,6 +1,7 @@
 import wollok.game.*
 import carpincho.*
 import direcciones.*
+import sonidos.*
 
 class Extra {
 
@@ -219,6 +220,12 @@ object salida inherits Extra(position = game.at(0, 0)) {
 
 	override method image() {
 		return "familia-carpincho.png"
+	}
+	
+	override method accionColision(personaje){
+		game.schedule(4000, {game.stop()})
+		sonidoGameplay.parar()
+		sonidoWinner.reproducir()
 	}
 
 }
