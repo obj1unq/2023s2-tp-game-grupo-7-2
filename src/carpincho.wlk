@@ -85,7 +85,7 @@ method mover(direccion) {
 		if(not poderActivado) {
 			energia -= personaje.energiaQueSaca()
 			if(not self.tieneEnergiaParaMover()) {
-				game.removeTickEvent("MOVER")
+				//game.removeTickEvent("MOVER")
 				game.schedule(3000, {game.stop()})
 				sonidoGameover.reproducir()
 				
