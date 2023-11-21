@@ -219,6 +219,10 @@ object salida inherits Extra(position = game.at(0, 0)) {
 	override method image() {
 		return "familia-carpincho.png"
 	}
+	
+	override method colision(personaje) {
+		game.schedule(3000, {game.stop()})
+	}
 
 }
 

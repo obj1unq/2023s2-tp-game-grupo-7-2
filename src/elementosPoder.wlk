@@ -1,43 +1,11 @@
 import wollok.game.*
 import randomizer.*
 
-//new Alpiste(position = randomizer.emptyPosition(), peso=(40..100).anyOne())
-
-
-//object mateFactory {
-//	method nuevo() {
-//		return new Mate(position=randomizer.emptyPosition())
-//	}
-//}
-//
-//object yerbaFactory {
-//	
-//	method nuevo() {
-//		return new Yerba(position=randomizer.emptyPosition())
-//	}
-//}
-//
-//object termoFactory {
-//	method nuevo() {
-//		return new Termo(position=randomizer.emptyPosition())
-//	}
-//}
-
 object elementosMateManager {
 	
 	var generados = #{}
 	
 	const elementos = [mate, yerba, termo]
-	
-	
-	//method seleccionarFactory() {
-
-//      Para una probabilidad de 10% alpiste 90% manzana		
-//		const x = 0.randomUpTo(1)
-//		return if (x < 0.10) alpisteFactory else manzanaFactory 
-		
-	//	return factories.anyOne() //igual de probabilidad
-	//}
 	
 	method generar() {
 		if(generados.size() == 0 ) { 		

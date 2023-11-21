@@ -190,7 +190,7 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 
 object gansoFactory {
 	method nuevo(position) {
-		return new Enemigo(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
+		return new Perro(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
 	}
 }
 
