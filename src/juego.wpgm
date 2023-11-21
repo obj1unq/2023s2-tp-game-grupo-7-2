@@ -31,7 +31,7 @@ program juego {
 	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 	game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
 	
-	game.onTick(4000, "MATIENZO", { elementosMateManager.generar()})
+	game.onTick(4000, "PODERMATE", { elementosMateManager.generar()})
 	
 	game.start()
 }

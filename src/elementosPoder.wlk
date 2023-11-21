@@ -67,6 +67,10 @@ class ElementosMate {
 	}
 	
 	method accionColision(personaje) {}
+	
+	method solido() {
+		return false
+	}
 }
 
 

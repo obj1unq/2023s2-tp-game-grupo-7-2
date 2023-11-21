@@ -5,8 +5,8 @@ class Enemigo {
 	var property position
 	const property energiaQueSaca
 	const property image
+	const manager
 	 
-	method quitarEnemigo()
 	method accionColision(personaje) {}
 	
 	method colision(personaje) {
@@ -22,8 +22,12 @@ class Enemigo {
 		if(self.puedeOcupar(proxima)) {
 			self.position(proxima)
 		} else {
-			self.quitarEnemigo()
+			manager.quitar(self)
 		}
+	}
+	
+	method solido() {
+		return false
 	}
 }
 
@@ -32,13 +36,9 @@ class Perro inherits Enemigo {
 	
 	override method colision(personaje) {
 		super(personaje)
-		perrosManager.quitar(self)
+		manager.quitar(self)
 	}
 	
-
-	override method quitarEnemigo() {
-		perrosManager.quitar(self)
-	}
 	
 }
 
@@ -47,12 +47,7 @@ class PerroIzq inherits Enemigo {
 	
 	override method colision(personaje) {
 		super(personaje)
-		perrosManagerIzquierda.quitar(self)
-	}
-	
-
-	override method quitarEnemigo() {
-		perrosManagerIzquierda.quitar(self)
+		manager.quitar(self)
 	}
 	
 }
@@ -84,34 +79,32 @@ class PerroCallejeroIzq inherits PerroIzq {
 object callejeroFactory {
 	
 	method nuevo(position) {
-		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png")
+		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManager)
 	}
 }
 
 object domesticadoFactory {
 	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png")
+		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
 	}
 }
 
 object callejeroIzquierdaFactory {
 	
 	method nuevo(position) {
-		return new PerroCallejeroIzq(energiaQueSaca = 100, position = position, image = "perro-callejero.png")
+		return new PerroCallejeroIzq(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManagerIzquierda)
 	}
 }
 
 object domesticadoIzquierdaFactory {
 	method nuevo(position) {
-		return new PerroIzq(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png")
+		return new PerroIzq(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
 	}
 }
 
 class EnemigosManager {
 	const generados = #{}
 	const factories
-	
-	method generar(position)
 	
 	
 	method seleccionarFactory() {
@@ -136,6 +129,18 @@ class EnemigosManager {
 		self.iniciarGeneracion(segundos, position)
 	}
 	
+	method generar(position) {
+		const perroIzq = self.seleccionarFactory().nuevo(position) 		
+		game.addVisual(perroIzq)	
+		generados.add(perroIzq)
+		
+	}
+	
+	method quitar(enemigo) {
+		generados.remove(enemigo)
+		game.removeVisual(enemigo)
+	}
+	
 	
 }
 
@@ -148,12 +153,6 @@ object perrosManager inherits EnemigosManager(factories = [callejeroFactory, dom
 		generados.add(perro)
 		
 	}
-	
-	method quitar(perro) {
-		generados.remove(perro)
-		game.removeVisual(perro)
-	}
-	
 
 }
 
@@ -178,25 +177,17 @@ object perrosManagerIzquierda inherits EnemigosManager(factories = [callejeroIzq
 object alcoholicaFactory {
 	
 	method nuevo(position) {
-		return new Humano(position = position, energiaQueSaca = 4000, image = "humana-alcohol.png")
+		return new Enemigo(position = position, energiaQueSaca = 4000, image = "humana-alcohol.png", manager = humanosManager)
 	}
 }
 
 object antiCarpiFactory {
 	method nuevo(position) {
-		return new Humano(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000)
+		return new Enemigo(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000, manager = humanosManager)
 	}
 }
 
 
-class Humano inherits Enemigo{
-	
-	
-	override method quitarEnemigo() {
-		humanosManager.quitar(self)
-	}
-
-}
 
 object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, antiCarpiFactory]) {
 	
@@ -204,26 +195,15 @@ object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, a
 	
 	override method generar(position) {
 		if(generados.size() < limite ) {
-			const humana = self.seleccionarFactory().nuevo(position) 		
-			game.addVisual(humana)	
-			generados.add(humana)
-			
+			super(position)
 		}
 	}
-	
-	method quitar(humana) {
-		generados.remove(humana)
-		game.removeVisual(humana)
-	}
-	
+
 }
 
 
 class Auto inherits Enemigo {
 	
-	override method quitarEnemigo() {
-		autosManager.quitar(self)
-	}
 	
 	override method colision(personaje) {
 		super(personaje)
@@ -238,7 +218,7 @@ class Auto inherits Enemigo {
 
 object autoFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto.gif", energiaQueSaca = 200)
+		return new Auto(position = position, image = "auto.gif", energiaQueSaca = 200, manager = autosManager)
 	}
 }
 
@@ -248,30 +228,16 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 	
 	override method generar(position) {
 		if(generados.size() < limite ) {
-			const auto = self.seleccionarFactory().nuevo(position) 		
-			game.addVisual(auto)	
-			generados.add(auto)
+			super(position)
 			
 		}
 	}
 	
-	method quitar(auto) {
-		generados.remove(auto)
-		game.removeVisual(auto)
-	}
-	
-}
-
-class Ganso inherits Enemigo {
-	
-	override method quitarEnemigo() {
-		gansosManager.quitar(self)
-	}
 }
 
 object gansoFactory {
 	method nuevo(position) {
-		return new Ganso(position = position, image = "ganso.png", energiaQueSaca = 200)
+		return new Enemigo(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
 	}
 }
 
@@ -281,22 +247,10 @@ object gansosManager inherits EnemigosManager(factories = [gansoFactory]) {
 	
 	override method generar(position) {
 		if(generados.size() < limite ) {
-			const ganso = self.seleccionarFactory().nuevo(position) 		
-			game.addVisual(ganso)	
-			generados.add(ganso)
+			super(position)
 			
 		}
 	}
-	
-	method quitar(ganso) {
-		generados.remove(ganso)
-		game.removeVisual(ganso)
-	}
-	
-}
 
-class Charco {
-	method image() {
-		return "charco.png"
-	}
+	
 }

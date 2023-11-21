@@ -13,6 +13,10 @@ class Extra {
 
 	method accionColision(personaje) {
 	}
+	
+	method solido() {
+		return false
+	}
 
 }
 
@@ -28,14 +32,6 @@ class Tierra inherits Extra {
 
 	override method image() {
 		return "tierra.png"
-	}
-
-}
-
-class Rocas inherits Extra {
-
-	override method image() {
-		return "rocas.png"
 	}
 
 }
@@ -65,6 +61,7 @@ const property energiaQueSaca = 10
 	}
 
  	override method accionColision(personaje) {
+ 		//if(game.getObjectsIn(position).contains(new T))
 		personaje.enfrentarseAVisual(self)
 	}
 
@@ -111,9 +108,6 @@ class TroncoIzqADer inherits Extra {
 		troncosManager.quitar(self)
 	}
 	
-	 method direccion() {
-		return derecha
-	}
 
 }
 
@@ -150,9 +144,6 @@ class TroncoDerAIzq inherits Extra {
 		troncosManager.quitar(self)
 	}
 	
-	 method direccion() {
-		return izquierda
-	}
 
 }
 
@@ -170,7 +161,7 @@ object troncosManager {
 	}
 
 	method iniciarMovimiento() {
-		game.onTick(1000, "MOVER", { generados.forEach({ extra => extra.mover()})})
+		game.onTick(2000, "MOVER", { generados.forEach({ extra => extra.mover()})})
 	}
 
 	method generar(position, direccion) {
@@ -209,6 +200,10 @@ object vida inherits Extra(position = game.at(0, 0)) {
 
 	override method image() {
 		return return "vida-" + carpincho.vidaVisual() + ".png"
+	}
+	
+	override method solido() {
+		return true
 	}
 
 }

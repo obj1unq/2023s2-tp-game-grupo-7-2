@@ -5,19 +5,12 @@ import extras.*
 
 object carpincho {
 
-	var position = game.at(0, 0)
+	var property position = game.at(0, 0)
 	var energia = 1000
 	var property perfil = derecha
 	const elementosParaSuperPoder = #{}
 	var poderActivado = false // TODO: Puede que esto sea un state, ya que al activar el poder cambia de imagen
 
-	method position() {
-		return position
-	}
-
-	method position(_position) {
-		position = _position
-	}
 
 	// method image() = "carpincho-derecha.png"
 	method image() {
@@ -37,7 +30,7 @@ object carpincho {
 	}
 
 	method puedeOcupar(posicion) {
-		return tablero.pertenece(posicion)
+		return tablero.puedeOcupar(posicion) 
 	}
 
 	method sePuedeMover(direccion) {
