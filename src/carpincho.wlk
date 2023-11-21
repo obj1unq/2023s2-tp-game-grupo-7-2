@@ -12,7 +12,6 @@ object carpincho {
 	var poderActivado = false // TODO: Puede que esto sea un state, ya que al activar el poder cambia de imagen
 
 
-	// method image() = "carpincho-derecha.png"
 	method image() {
 		return "" + self + "-" + self.perfil() + ".png"
 	}
