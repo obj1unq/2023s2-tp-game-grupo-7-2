@@ -6,94 +6,126 @@ import direcciones.*
 import obstaculos.*
 
 object _ {
-	
+
 	method generar(position) {
-	}	
+	}
+
 }
 
 object a {
+
 	method generar(position) {
-		game.addVisual(new Pasto(position=position))
+		game.addVisual(new Pasto(position = position))
 		carpincho.position(position)
-	}		
+	}
+
 }
 
 object h {
+
 	method generar(position) {
-		game.addVisual(new Piso(position=position))
+		game.addVisual(new Piso(position = position))
 		humanosManager.iniciarGeneracionYMovimiento(3, position, derecha)
-	}	
+	}
+
 }
-object p{
+
+object p {
+
 	method generar(position) {
-		game.addVisual(new Vereda(position=position))
+		game.addVisual(new Vereda(position = position))
 		perrosManager.iniciarGeneracionYMovimiento(2, position, derecha)
-	}		
+	}
+
 }
 
-object pi{
+object pi {
+
 	method generar(position) {
-		game.addVisual(new Vereda(position=position))
+		game.addVisual(new Vereda(position = position))
 		perrosManagerIzquierda.iniciarGeneracionYMovimiento(2, position, izquierda)
-	}		
+	}
+
 }
 
-object v{
+object v {
+
 	method generar(position) {
-		game.addVisual(new Pasto(position=position))
+		game.addVisual(new Pasto(position = position))
 		vida.position(position)
-		
-	}		
+	}
+
 }
 
-object s{
+object s {
+
 	method generar(position) {
 		salida.position(position)
-		game.addVisual(new Pasto(position=position))
+		game.addVisual(new Pasto(position = position))
 		game.addVisual(salida)
-		
-	}		
+	}
+
 }
 
+object d {
 
-object d{
 	method generar(position) {
-		game.addVisual(new Pasto(position=position))
-	}		
+		game.addVisual(new Pasto(position = position))
+	}
+
 }
 
-object dv{
-	method generar(position) {
-		game.addVisual(new Pasto(position=position))
+object dv {
 
-	}		
+	method generar(position) {
+		game.addVisual(new Pasto(position = position))
+	}
+
 }
 
-object f{
+object f {
+
 	method generar(position) {
-		game.addVisual(new Asfalto(position=position))
-	}		
+		game.addVisual(new Asfalto(position = position))
+	}
+
 }
 
-object fg{
-	
+object fg {
+
 	method generar(position) {
-		game.addVisual(new Asfalto(position=position))
+		game.addVisual(new Asfalto(position = position))
 		autosManager.iniciarGeneracionYMovimiento(4, position, izquierda)
-	}		
+	}
+
 }
 
-object r{
+object r {
+
 	method generar(position) {
-		game.addVisual(new Rio(position=position, energiaQueSaca=100 ))
-	}		
+		game.addVisual(new Rio(position = position, energiaQueSaca = 100))
+	}
+
 }
 
-object l{
+object l {
+
 	method generar(position) {
-		game.addVisual(new RioBotella(position=position, energiaQueSaca=100))
-	}		
+		game.addVisual(new RioBotella(position = position, energiaQueSaca = 100))
+	}
+
 }
+
+
+object ta {
+
+	method generar(position) {
+		game.addVisual(new TroncoConAgua(position = position))
+	}
+
+}
+
+
 
 object ln{
 	method generar(position) {
@@ -148,8 +180,8 @@ object mapa {
 	var celdas = [
 		[v,dv,dv,m,m,m,m,s,m,m,m,m,m,m,m],
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
-		[l,r,r,r,l,r,l,r,l,r,r,r,l,r,ln],
-		[rn,r,l,r,r,r,l,l,r,l,r,l,r,r,r],
+		[l,ta,r,r,l,r,l,r,l,r,r,r,l,r,ln],
+		[rn,ta,l,r,r,r,l,l,r,l,r,l,r,r,r],
 		[h,q,q,q,q,q,q,q,q,q,q,q,q,q,q],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],

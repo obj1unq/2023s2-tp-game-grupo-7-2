@@ -44,6 +44,13 @@ class Asfalto inherits Extra {
 
 }
 
+class TroncoConAgua inherits Extra {
+	
+	override method image() {
+		return "troncoConAgua.png"
+	}
+}
+
 class Piso inherits Extra {
 
 	override method image() {
@@ -61,7 +68,7 @@ const property energiaQueSaca = 10
 	}
 
  	override method accionColision(personaje) {
- 		//if(game.getObjectsIn(position).contains(new T))
+ 	
 		personaje.enfrentarseAVisual(self)
 	}
 
@@ -75,10 +82,10 @@ class RioBotella inherits Rio {
 
 }
 
-class TroncoIzqADer inherits Extra {
+/*class TroncoIzqADer inherits Extra {
 
 	override method image() {
-		return "tronco.png"
+		return "troncoConAgua.png"
 	}
 
 	override method colision(personaje) {
@@ -92,12 +99,12 @@ class TroncoIzqADer inherits Extra {
 	}
 
 	method mover() {
-		const proxima = self.position().right(1)
+	 	const proxima = self.position().right(1)
 		if (self.puedeOcupar(proxima)) {
 			self.position(proxima)
 		} else {
 			self.quitarTronco()
-		}
+		
 	}
 
 	method estaCarpinchoSobre() {
@@ -114,7 +121,7 @@ class TroncoIzqADer inherits Extra {
 class TroncoDerAIzq inherits Extra {
 
 	override method image() {
-		return "tronco.png"
+		return "troncoConAgua.png"
 	}
 
 	override method colision(personaje) {
@@ -133,18 +140,18 @@ class TroncoDerAIzq inherits Extra {
 			self.position(proxima)
 		} else {
 			self.quitarTronco()
-		}
+		} 
 	}
 
 	method estaCarpinchoSobre() {
 		return self.position().equals(carpincho.position())
 	}
 
-	method quitarTronco() {
+  	method quitarTronco() {
 		troncosManager.quitar(self)
 	}
 
-}
+}*/
 
 object troncosManager {
 
@@ -156,14 +163,14 @@ object troncosManager {
 	}
 
 	method iniciarGeneracion(segundos, position, direccion) {
-		game.onTick(segundos * 1000, "EXTRAS", { self.generar(position, direccion)})
+	//	game.onTick(segundos * 1000, "EXTRAS", { self.generar(position, direccion)})
 	}
 
 	method iniciarMovimiento() {
 		game.onTick(2000, "MOVER", { generados.forEach({ extra => extra.mover()})})
 	}
 
-	method generar(position, direccion) {
+	/*method generar(position, direccion) {
 		const tronco = if (direccion.equals(derecha)) {
 			new TroncoIzqADer(position = position)
 		} else {
@@ -174,7 +181,7 @@ object troncosManager {
 		if (tronco.estaCarpinchoSobre()) {
 			game.addVisual(carpincho)
 		}
-	}
+	}*/
 	
 	method troncoSobreCarpincho(posicion) {
       self.generados().find({ tronco => tronco.position().equals(posicion) })
