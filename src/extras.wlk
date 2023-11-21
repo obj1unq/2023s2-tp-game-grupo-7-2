@@ -143,7 +143,6 @@ class TroncoDerAIzq inherits Extra {
 	method quitarTronco() {
 		troncosManager.quitar(self)
 	}
-	
 
 }
 

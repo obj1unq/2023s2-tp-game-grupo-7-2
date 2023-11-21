@@ -39,17 +39,6 @@ class Perro inherits Enemigo {
 		manager.quitar(self)
 	}
 	
-	
-}
-
-class PerroIzq inherits Enemigo {
-	 
-	
-	override method colision(personaje) {
-		super(personaje)
-		manager.quitar(self)
-	}
-	
 }
 
 class PerroCallejero inherits Perro {
@@ -61,44 +50,6 @@ class PerroCallejero inherits Perro {
 	
 	method efectoDeEnfrentamiento(posicionPersonaje) {
 		return if(posicionPersonaje.x() >= 3) 3 else posicionPersonaje.x()
-	}
-}
-
-class PerroCallejeroIzq inherits PerroIzq {
-	
-	override method colision(personaje) {
-		super(personaje)
-		personaje.position(game.at(personaje.position().x(), personaje.position().y() - self.efectoDeEnfrentamiento(personaje.position())))	
-	}
-	
-	method efectoDeEnfrentamiento(posicionPersonaje) {
-		return if(posicionPersonaje.y() >= 3) 3 else posicionPersonaje.y()
-	}
-}
-
-object callejeroFactory {
-	
-	method nuevo(position) {
-		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManager)
-	}
-}
-
-object domesticadoFactory {
-	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
-	}
-}
-
-object callejeroIzquierdaFactory {
-	
-	method nuevo(position) {
-		return new PerroCallejeroIzq(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManagerIzquierda)
-	}
-}
-
-object domesticadoIzquierdaFactory {
-	method nuevo(position) {
-		return new PerroIzq(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
 	}
 }
 
@@ -130,10 +81,11 @@ class EnemigosManager {
 	}
 	
 	method generar(position) {
-		const perroIzq = self.seleccionarFactory().nuevo(position) 		
-		game.addVisual(perroIzq)	
-		generados.add(perroIzq)
-		
+		if(generados.size() < self.limite() ) {
+			const enemigo = self.seleccionarFactory().nuevo(position) 		
+			game.addVisual(enemigo)	
+			generados.add(enemigo)
+		}
 	}
 	
 	method quitar(enemigo) {
@@ -142,36 +94,49 @@ class EnemigosManager {
 	}
 	
 	
+	method limite()
+}
+
+
+object callejeroFactory {
+	
+	method nuevo(position) {
+		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManager)
+	}
+}
+
+object callejeroIzquierdaFactory {
+	
+	method nuevo(position) {
+		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManagerIzquierda)
+	}
+}
+
+object domesticadoFactory {
+	method nuevo(position) {
+		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
+	}
+}
+
+
+object domesticadoIzquierdaFactory {
+	method nuevo(position) {
+		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
+	}
 }
 
 object perrosManager inherits EnemigosManager(factories = [callejeroFactory, domesticadoFactory]) {
 	
-	
-	override method generar(position) {
-		const perro = self.seleccionarFactory().nuevo(position) 		
-		game.addVisual(perro)	
-		generados.add(perro)
-		
+	override method limite() {
+		return 10
 	}
-
 }
 
 object perrosManagerIzquierda inherits EnemigosManager(factories = [callejeroIzquierdaFactory, domesticadoIzquierdaFactory]) {
 	
-	
-	override method generar(position) {
-		const perroIzq = self.seleccionarFactory().nuevo(position) 		
-		game.addVisual(perroIzq)	
-		generados.add(perroIzq)
-		
+	override method limite() {
+		return 9
 	}
-	
-	method quitar(perroIzq) {
-		generados.remove(perroIzq)
-		game.removeVisual(perroIzq)
-	}
-	
-
 }
 
 object alcoholicaFactory {
@@ -187,18 +152,11 @@ object antiCarpiFactory {
 	}
 }
 
-
-
 object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, antiCarpiFactory]) {
 	
-	const limite = 3	
-	
-	override method generar(position) {
-		if(generados.size() < limite ) {
-			super(position)
-		}
+	override method limite() {
+		return 3
 	}
-
 }
 
 
@@ -224,13 +182,8 @@ object autoFactory {
 
 object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 	
-	const limite = 5	
-	
-	override method generar(position) {
-		if(generados.size() < limite ) {
-			super(position)
-			
-		}
+	override method limite() {
+		return 5
 	}
 	
 }
@@ -243,14 +196,8 @@ object gansoFactory {
 
 object gansosManager inherits EnemigosManager(factories = [gansoFactory]) {
 	
-	const limite = 5	
-	
-	override method generar(position) {
-		if(generados.size() < limite ) {
-			super(position)
-			
-		}
+	override method limite() {
+		return 4
 	}
 
-	
 }
