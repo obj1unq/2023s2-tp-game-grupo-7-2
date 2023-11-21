@@ -11,7 +11,7 @@ object _ {
 	}	
 }
 
-object da {
+object a {
 	method generar(position) {
 		game.addVisual(new Pasto(position=position))
 		carpincho.position(position)
@@ -59,6 +59,13 @@ object s{
 object d{
 	method generar(position) {
 		game.addVisual(new Pasto(position=position))
+	}		
+}
+
+object dv{
+	method generar(position) {
+		game.addVisual(new Pasto(position=position))
+
 	}		
 }
 
@@ -139,7 +146,7 @@ object mapa {
 	
 	
 	var celdas = [
-		[v,d,d,m,m,m,m,s,m,m,m,m,m,m,m],
+		[v,dv,dv,m,m,m,m,s,m,m,m,m,m,m,m],
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
 		[l,r,r,r,l,r,l,r,l,r,r,r,l,r,ln],
 		[rn,r,l,r,r,r,l,l,r,l,r,l,r,r,r],
@@ -149,7 +156,7 @@ object mapa {
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,pi],
-		[d,d,d,d,d,d,d,d,da,d,d,d,d,d,d]	
+		[d,d,d,d,d,d,d,d,a,d,d,d,d,d,d]	
 	].reverse() //reverse porque el y crece en el orden inverso
 	
 	
