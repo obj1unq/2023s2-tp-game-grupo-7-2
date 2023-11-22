@@ -10,8 +10,13 @@ class Enemigo {
 	method accionColision(personaje) {}
 	
 	method colision(personaje) {
-		personaje.enfrentarseAVisual(self)
+		if(not personaje.poder().estaActivo()) {
+			personaje.enfrentarseAVisual(self)
+			self.efectoDeEnfrentarse(personaje)
+		}
 	}
+	
+	method efectoDeEnfrentarse(personaje) {}
 	
 	method puedeOcupar(posicion) {
 		return tablero.pertenece(posicion)
@@ -33,9 +38,7 @@ class Enemigo {
 
 class Perro inherits Enemigo {
 	 
-	
-	override method colision(personaje) {
-		super(personaje)
+	override method efectoDeEnfrentarse(personaje) {
 		manager.quitar(self)
 	}
 	
@@ -43,7 +46,7 @@ class Perro inherits Enemigo {
 
 class PerroCallejero inherits Perro {
 	
-	override method colision(personaje) {
+	override method efectoDeEnfrentarse(personaje) {
 		super(personaje)
 		personaje.position(game.at(personaje.position().x(), personaje.position().y() - self.efectoDeEnfrentamiento(personaje.position())))	
 	}
@@ -163,10 +166,9 @@ object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, a
 class Auto inherits Enemigo {
 	
 	
-	override method colision(personaje) {
-		super(personaje)
+	override method efectoDeEnfrentarse(personaje) {
 		autosManager.quitar(self)
-		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))	
+		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))		
 	}
 	
 	method efectoDeEnfrentamiento(posicionPersonaje) {

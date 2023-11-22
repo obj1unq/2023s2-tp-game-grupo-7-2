@@ -68,8 +68,10 @@ const property energiaQueSaca = 10
 	}
 
  	override method accionColision(personaje) {
- 	
-		personaje.enfrentarseAVisual(self)
+ 		if(not personaje.poder().estaActivo()) {
+ 			personaje.enfrentarseAVisual(self)
+ 		}
+		
 	}
 
 }
@@ -205,7 +207,7 @@ class Vereda inherits Extra {
 object vida inherits Extra(position = game.at(0, 0)) {
 
 	override method image() {
-		return return "vida-" + carpincho.vidaVisual() + ".png"
+		return "vida-" + carpincho.vidaVisual() + ".png"
 	}
 	
 	override method solido() {
@@ -221,7 +223,7 @@ object salida inherits Extra(position = game.at(0, 0)) {
 	}
 	
 	override method colision(personaje) {
-		game.schedule(3000, {game.stop()})
+		game.schedule(2000, {game.stop()})
 	}
 
 }

@@ -10,7 +10,7 @@ import elementosPoder.*
 
 program juego {
 	
-	sonidoGameplay.reproducir()
+	//sonidoGameplay.reproducir()
 	
 	game.title("El carpincho de Nordelta")
 	

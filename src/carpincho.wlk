@@ -7,13 +7,16 @@ object carpincho {
 
 	var property position = game.at(0, 0)
 	var energia = 1000
-	var property perfil = derecha
 	const elementosParaSuperPoder = #{}
-	var poderActivado = false // TODO: Puede que esto sea un state, ya que al activar el poder cambia de imagen
+	var poder = desactivado
 
 
 	method image() {
-		return "" + self + "-" + self.perfil() + ".png"
+		return poder.imagen()
+	}
+	
+	method poder() {
+		return poder
 	}
 
 	method energiaParaMover() {
@@ -44,64 +47,34 @@ object carpincho {
 	}
 
 
-
-
-
-
-	method colision(personaje) {
-		troncosManager.generados().forEach({ tronco =>
-			if (self.position().equals(tronco.position())) {
-				personaje.moverConObjeto(tronco)
-				if (tronco.direccion().equals(derecha) || tronco.direccion().equals(izquierda)) {
-					self.subirseAlTronco(tronco)
-				}
-			}
-		})
-			// Verificar si la colisión es con un río
-		if (personaje.getClass().name() == "Rio" || personaje.getClass().name() == "RioBotella") {
-			personaje.enfrentarseAVisual(self)
-		}
-	}
-
-	method subirseAlTronco(tronco) {
-		// Posicionar al carpincho en el tronco
-		self.position(tronco.position())
-			// Mover al carpincho en la dirección del tronco
-		self.mover(tronco.direccion())
-	}
-
-
-
-
-method mover(direccion) {
+	method mover(direccion) {
 		self.validarMover(direccion)
 		const proxima = direccion.siguiente(self.position())		
 		self.position(proxima)
-		self.perfil(direccion)
+		poder.perfil(direccion)
 		
 	}
 	
 	method enfrentarseAVisual(personaje) {
-		if(not poderActivado) {
-			energia -= personaje.energiaQueSaca()
-			if(not self.tieneEnergiaParaMover()) {
-				game.removeTickEvent("MOVER")
-				game.schedule(3000, {game.stop()})
-				sonidoGameover.reproducir()
+		energia -= personaje.energiaQueSaca()
+		if(not self.tieneEnergiaParaMover()) {
+			game.removeTickEvent("MOVER")
+			game.schedule(3000, {game.stop()})
+			sonidoGameover.reproducir()
 				
-			}	
-		}
+		}	
 	}
 	
 	method activarSuperPoder() {
 		self.validarActivarSuperPoder()
-		poderActivado = true
-		//TODO cambiar imagen carpincho
+		poder = activado
+		game.schedule(5000, {poder = desactivado})
+		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 	}
 	
 	method validarActivarSuperPoder() {
 		if(not self.tieneElementosNecesariosParaSuperPoder()) {
-			self.error("No tengo los elementos necesarios para activar el poder!")
+			self.error("Todavia no puedo activar el poder!")
 		}
 	}
 	
@@ -124,6 +97,27 @@ method mover(direccion) {
 		}
 	}
 	
+}
 
+object activado {
+	var property perfil = derecha
+	method imagen() {
+		return "super" + "-" + carpincho + "-" + self.perfil() + ".png"
+	}
+	
+	method estaActivo() {
+		return true
+	}
+}
+
+object desactivado {
+	var property perfil = derecha 
+	method imagen() {
+		return "" + carpincho + "-" + self.perfil() + ".png"
+	}
+	
+	method estaActivo() {
+		return false
+	}
 }
 
