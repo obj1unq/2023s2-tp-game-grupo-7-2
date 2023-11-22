@@ -10,28 +10,11 @@ import elementosPoder.*
 
 program juego {
 	
-	sonidoGameplay.reproducir()
+	//sonidoGameplay.reproducir()
 	
 	game.title("El carpincho de Nordelta")
 	
-	game.width(15)
-	game.height(12)
-	game.cellSize(70)
-	
-	mapa.generar()
-	
-	 
-	keyboard.up().onPressDo({carpincho.mover(arriba)})	
-	keyboard.down().onPressDo({carpincho.mover(abajo)})
-	keyboard.left().onPressDo({carpincho.mover(izquierda)})
-	keyboard.right().onPressDo({carpincho.mover(derecha)})
-	keyboard.x().onPressDo({carpincho.activarSuperPoder()})
-	
-	
-	game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
-	game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
-	
-	game.schedule(4000, {elementosMateManager.generar()})
+	tablero.iniciar()
 	
 	
 	game.start()

@@ -4,6 +4,7 @@ import extras.*
 import enemigos.*
 import direcciones.*
 import obstaculos.*
+import elementosPoder.*
 
 object _ {
 
@@ -186,6 +187,12 @@ object mapa {
 	
 	
 	method generar() {
+		game.clear()
+		
+		game.width(15)
+		game.height(11)
+		game.cellSize(70)
+		
 		game.width(celdas.anyOne().size())
 		game.height(celdas.size())
 		(0..game.width() -1).forEach({x =>
@@ -195,11 +202,28 @@ object mapa {
 		})
 		game.addVisual(vida)
 		game.addVisual(carpincho) 
+		
+		self.comenzar()
 	}
 	
 	method generarCelda(x,y) {
 		const celda = celdas.get(y).get(x)
 		celda.generar(game.at(x,y))
+	}
+	
+	method comenzar() {
+		
+		keyboard.up().onPressDo({carpincho.mover(arriba)})	
+		keyboard.down().onPressDo({carpincho.mover(abajo)})
+		keyboard.left().onPressDo({carpincho.mover(izquierda)})
+		keyboard.right().onPressDo({carpincho.mover(derecha)})
+		keyboard.x().onPressDo({carpincho.activarSuperPoder()})
+		
+		
+		game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
+		game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
+		
+		game.schedule(4000, {elementosMateManager.generar()})
 	}
 	
 }
