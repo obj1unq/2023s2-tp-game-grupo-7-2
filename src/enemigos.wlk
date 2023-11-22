@@ -71,7 +71,7 @@ class EnemigosManager {
 	}
 	
 	method iniciarGeneracion(segundos, position) {
-		game.onTick(segundos * 1000,"ENEMIGOS", {self.generar(position)})
+		game.onTick(segundos * 1000, "ENEMIGOS", {self.generar(position)})
 	}
 	
 	method iniciarMovimiento(direccion) {
@@ -149,13 +149,33 @@ object alcoholicaFactory {
 	}
 }
 
+object alcoholicaFactoryIzquierda {
+	
+	method nuevo(position) {
+		return new Enemigo(position = position, energiaQueSaca = 4000, image = "humana-alcohol.png", manager = humanosManagerIzquierda)
+	}
+}
+
 object antiCarpiFactory {
 	method nuevo(position) {
 		return new Enemigo(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000, manager = humanosManager)
 	}
 }
 
+object antiCarpiFactoryIzquierda {
+	method nuevo(position) {
+		return new Enemigo(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000, manager = humanosManagerIzquierda)
+	}
+}
+
 object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, antiCarpiFactory]) {
+	
+	override method limite() {
+		return 3
+	}
+}
+
+object humanosManagerIzquierda inherits EnemigosManager(factories = [alcoholicaFactoryIzquierda, antiCarpiFactoryIzquierda]) {
 	
 	override method limite() {
 		return 3
@@ -182,7 +202,21 @@ object autoFactory {
 	}
 }
 
+object autoFactoryDerecha {
+	method nuevo(position) {
+		return new Auto(position = position, image = "auto.gif", energiaQueSaca = 200, manager = autosManagerDerecha)
+	}
+}
+
 object autosManager inherits EnemigosManager(factories = [autoFactory]) {
+	
+	override method limite() {
+		return 5
+	}
+	
+}
+
+object autosManagerDerecha inherits EnemigosManager(factories = [autoFactoryDerecha]) {
 	
 	override method limite() {
 		return 5

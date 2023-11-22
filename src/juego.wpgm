@@ -15,7 +15,7 @@ program juego {
 	game.title("El carpincho de Nordelta")
 	
 	game.width(15)
-	game.height(12)
+	game.height(14)
 	game.cellSize(70)
 	
 	mapa.generar()
