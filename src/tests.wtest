@@ -10,6 +10,7 @@ import elementosPoder.*
 describe "Test del carpincho" {
 	
 	const perroCallejero = new PerroCallejero(position = game.at(0, 0), energiaQueSaca = 100, image = "perro-callejero.png", manager = perrosManager)
+	const humana = new Enemigo(position = game.at(3,0), energiaQueSaca = 4000, image = "humana-acohol.png", manager = humanosManager)
 	
 	test "position inicial del carpincho" {
 		assert.equals(game.at(0,0), carpincho.position())
@@ -48,6 +49,16 @@ describe "Test del carpincho" {
 	test "al enfrentarse con un perro callejero lo lanza 3 posiciones y le quita 100 de vida" {
 		assert.equals(100, perroCallejero.energiaQueSaca())
 		assert.equals(3, perroCallejero.efectoDeEnfrentamiento(game.at(5, 5)))
+	}
+	
+	test "al enfrentarse con un humano le quita toda la vida" {
+		carpincho.mover(derecha)
+		carpincho.mover(derecha)
+		carpincho.mover(derecha)
+		assert.equals(game.at(3,0), carpincho.position())
+		assert.equals(1000, carpincho.energia())
+		carpincho.enfrentarseAVisual(humana)
+		assert.equals(0, carpincho.energia())
 	}
 }
 

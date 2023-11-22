@@ -17,6 +17,10 @@ object carpincho {
 	method poder() {
 		return poder
 	}
+	
+	method energia() {
+		return energia
+	}
 
 	method energiaParaMover() {
 		return 10
@@ -54,6 +58,7 @@ object carpincho {
 			// game.removeTickEvent("MOVER")
 			game.schedule(3000, { game.stop()})
 			game.schedule(1000, { sonidoGameover.reproducir()})
+			energia = 0
 		}
 	}
 
