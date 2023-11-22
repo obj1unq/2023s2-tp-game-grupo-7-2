@@ -23,12 +23,7 @@ object carpincho {
 	}
 
 	method vidaVisual() {
-		return if (energia > 750) 1000 
-			   else if (energia > 500) 750 
-			   else if (energia > 250) 500 
-			   else if (energia > 100) 250 
-			   else if (energia > 0) 100 
-			   else 0
+		return if (energia > 750) 1000 else if (energia > 500) 750 else if (energia > 250) 500 else if (energia > 100) 250 else if (energia > 0) 100 else 0
 	}
 
 	method tieneEnergiaParaMover() {
