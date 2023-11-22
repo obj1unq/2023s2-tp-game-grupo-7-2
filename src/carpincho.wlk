@@ -11,8 +11,6 @@ object carpincho {
 	const elementosParaSuperPoder = #{}
 	var poderActivado = false // TODO: Puede que esto sea un state, ya que al activar el poder cambia de imagen
 
-
-	// method image() = "carpincho-derecha.png"
 	method image() {
 		return "" + self + "-" + self.perfil() + ".png"
 	}
@@ -30,7 +28,7 @@ object carpincho {
 	}
 
 	method puedeOcupar(posicion) {
-		return tablero.puedeOcupar(posicion) 
+		return tablero.puedeOcupar(posicion)
 	}
 
 	method sePuedeMover(direccion) {
@@ -43,11 +41,6 @@ object carpincho {
 			self.error("No puedo moverme ahí")
 		}
 	}
-
-
-
-
-
 
 	method colision(personaje) {
 		troncosManager.generados().forEach({ tronco =>
@@ -71,60 +64,54 @@ object carpincho {
 		self.mover(tronco.direccion())
 	}
 
-
-
-
-method mover(direccion) {
+	method mover(direccion) {
 		self.validarMover(direccion)
-		const proxima = direccion.siguiente(self.position())		
+		const proxima = direccion.siguiente(self.position())
 		self.position(proxima)
 		self.perfil(direccion)
-		
 	}
-	
+
 	method enfrentarseAVisual(personaje) {
-		if(not poderActivado) {
+		if (not poderActivado) {
 			energia -= personaje.energiaQueSaca()
-			if(not self.tieneEnergiaParaMover()) {
-				//game.removeTickEvent("MOVER")
-				game.schedule(4000, {game.stop()})
+			if (not self.tieneEnergiaParaMover()) {
+				// game.removeTickEvent("MOVER")
+				game.schedule(4000, { game.stop()})
 				sonidoGameover.reproducir()
-				
-			}	
+			}
 		}
 	}
-	
+
 	method activarSuperPoder() {
 		self.validarActivarSuperPoder()
 		poderActivado = true
-		//TODO cambiar imagen carpincho
+	// TODO cambiar imagen carpincho
 	}
-	
+
 	method validarActivarSuperPoder() {
-		if(not self.tieneElementosNecesariosParaSuperPoder()) {
+		if (not self.tieneElementosNecesariosParaSuperPoder()) {
 			self.error("No tengo los elementos necesarios para activar el poder!")
 		}
 	}
-	
+
 	method tieneElementosNecesariosParaSuperPoder() {
 		return elementosParaSuperPoder.size() == 3
 	}
-	
+
 	method moverConObjeto(objeto) {
 		self.position(objeto.position())
 	}
-	
+
 	method agarrarElemento(elemento) {
 		self.validarAgarrarElemento(elemento)
 		elementosParaSuperPoder.add(elemento)
 	}
-	
+
 	method validarAgarrarElemento(elemento) {
 		if (elementosParaSuperPoder.contains(elemento)) {
 			self.error("Ya tengo este elemento!")
 		}
 	}
-	
 
 }
 

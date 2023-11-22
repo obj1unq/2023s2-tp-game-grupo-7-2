@@ -189,8 +189,7 @@ object mapa {
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,pi],
 		[d,d,d,d,d,d,d,d,a,d,d,d,d,d,d]	
-	].reverse() //reverse porque el y crece en el orden inverso
-	
+	].reverse() 
 	
 	
 	method generar() {

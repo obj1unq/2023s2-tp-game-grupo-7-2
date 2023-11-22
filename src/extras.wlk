@@ -14,7 +14,7 @@ class Extra {
 
 	method accionColision(personaje) {
 	}
-	
+
 	method solido() {
 		return false
 	}
@@ -46,10 +46,11 @@ class Asfalto inherits Extra {
 }
 
 class TroncoConAgua inherits Extra {
-	
+
 	override method image() {
 		return "troncoConAgua.png"
 	}
+
 }
 
 class Piso inherits Extra {
@@ -62,14 +63,13 @@ class Piso inherits Extra {
 
 class Rio inherits Extra {
 
-const property energiaQueSaca = 10
+	const property energiaQueSaca = 10
 
 	override method image() {
 		return "rio.png"
 	}
 
- 	override method accionColision(personaje) {
- 	
+	override method accionColision(personaje) {
 		personaje.enfrentarseAVisual(self)
 	}
 
@@ -85,76 +85,74 @@ class RioBotella inherits Rio {
 
 /*class TroncoIzqADer inherits Extra {
 
-	override method image() {
-		return "troncoConAgua.png"
-	}
+ * 	override method image() {
+ * 		return "troncoConAgua.png"
+ * 	}
 
-	override method colision(personaje) {
-		if (personaje.position().equals(self.position())) {
-			personaje.moverConObjeto(self)
-		}
-	}
+ * 	override method colision(personaje) {
+ * 		if (personaje.position().equals(self.position())) {
+ * 			personaje.moverConObjeto(self)
+ * 		}
+ * 	}
 
-	method puedeOcupar(posicion) {
-		return tablero.pertenece(posicion)
-	}
+ * 	method puedeOcupar(posicion) {
+ * 		return tablero.pertenece(posicion)
+ * 	}
 
-	method mover() {
-	 	const proxima = self.position().right(1)
-		if (self.puedeOcupar(proxima)) {
-			self.position(proxima)
-		} else {
-			self.quitarTronco()
-		
-	}
+ * 	method mover() {
+ * 	 	const proxima = self.position().right(1)
+ * 		if (self.puedeOcupar(proxima)) {
+ * 			self.position(proxima)
+ * 		} else {
+ * 			self.quitarTronco()
+ * 		
+ * 	}
 
-	method estaCarpinchoSobre() {
-		return self.position().equals(carpincho.position())
-	}
+ * 	method estaCarpinchoSobre() {
+ * 		return self.position().equals(carpincho.position())
+ * 	}
 
-	method quitarTronco() {
-		troncosManager.quitar(self)
-	}
-	
+ * 	method quitarTronco() {
+ * 		troncosManager.quitar(self)
+ * 	}
+ * 	
 
-}
+ * }
 
-class TroncoDerAIzq inherits Extra {
+ * class TroncoDerAIzq inherits Extra {
 
-	override method image() {
-		return "troncoConAgua.png"
-	}
+ * 	override method image() {
+ * 		return "troncoConAgua.png"
+ * 	}
 
-	override method colision(personaje) {
-		if (personaje.position().equals(self.position())) {
-			personaje.moverConObjeto(self)
-		}
-	}
+ * 	override method colision(personaje) {
+ * 		if (personaje.position().equals(self.position())) {
+ * 			personaje.moverConObjeto(self)
+ * 		}
+ * 	}
 
-	method puedeOcupar(posicion) {
-		return tablero.pertenece(posicion)
-	}
+ * 	method puedeOcupar(posicion) {
+ * 		return tablero.pertenece(posicion)
+ * 	}
 
-	method mover() {
-		const proxima = self.position().left(1)
-		if (self.puedeOcupar(proxima)) {
-			self.position(proxima)
-		} else {
-			self.quitarTronco()
-		} 
-	}
+ * 	method mover() {
+ * 		const proxima = self.position().left(1)
+ * 		if (self.puedeOcupar(proxima)) {
+ * 			self.position(proxima)
+ * 		} else {
+ * 			self.quitarTronco()
+ * 		} 
+ * 	}
 
-	method estaCarpinchoSobre() {
-		return self.position().equals(carpincho.position())
-	}
+ * 	method estaCarpinchoSobre() {
+ * 		return self.position().equals(carpincho.position())
+ * 	}
 
-  	method quitarTronco() {
-		troncosManager.quitar(self)
-	}
-	
+ *   	method quitarTronco() {
+ * 		troncosManager.quitar(self)
+ * 	}
 
-}*/
-
+ }*/
 object troncosManager {
 
 	const property generados = #{}
@@ -165,7 +163,7 @@ object troncosManager {
 	}
 
 	method iniciarGeneracion(segundos, position, direccion) {
-	//	game.onTick(segundos * 1000, "EXTRAS", { self.generar(position, direccion)})
+	// game.onTick(segundos * 1000, "EXTRAS", { self.generar(position, direccion)})
 	}
 
 	method iniciarMovimiento() {
@@ -173,21 +171,20 @@ object troncosManager {
 	}
 
 	/*method generar(position, direccion) {
-		const tronco = if (direccion.equals(derecha)) {
-			new TroncoIzqADer(position = position)
-		} else {
-			new TroncoDerAIzq(position = position)
-		}
-		game.addVisual(tronco)
-		generados.add(tronco)
-		if (tronco.estaCarpinchoSobre()) {
-			game.addVisual(carpincho)
-		}
-	}*/
-	
+	 * 	const tronco = if (direccion.equals(derecha)) {
+	 * 		new TroncoIzqADer(position = position)
+	 * 	} else {
+	 * 		new TroncoDerAIzq(position = position)
+	 * 	}
+	 * 	game.addVisual(tronco)
+	 * 	generados.add(tronco)
+	 * 	if (tronco.estaCarpinchoSobre()) {
+	 * 		game.addVisual(carpincho)
+	 * 	}
+	 }*/
 	method troncoSobreCarpincho(posicion) {
-      self.generados().find({ tronco => tronco.position().equals(posicion) })
-}
+		self.generados().find({ tronco => tronco.position().equals(posicion)})
+	}
 
 	method quitar(tronco) {
 		generados.remove(tronco)
@@ -209,7 +206,7 @@ object vida inherits Extra(position = game.at(0, 0)) {
 	override method image() {
 		return return "vida-" + carpincho.vidaVisual() + ".png"
 	}
-	
+
 	override method solido() {
 		return true
 	}
@@ -221,9 +218,9 @@ object salida inherits Extra(position = game.at(0, 0)) {
 	override method image() {
 		return "familia-carpincho.png"
 	}
-	
-	override method accionColision(personaje){
-		game.schedule(4000, {game.stop()})
+
+	override method accionColision(personaje) {
+		game.schedule(4000, { game.stop()})
 		sonidoGameplay.parar()
 		sonidoWinner.reproducir()
 	}
