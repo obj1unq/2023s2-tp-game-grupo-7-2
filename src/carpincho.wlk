@@ -13,7 +13,7 @@ object carpincho {
 	method image() {
 		return poder.imagen()
 	}
-	
+
 	method poder() {
 		return poder
 	}
@@ -45,33 +45,36 @@ object carpincho {
 		}
 	}
 
-
 	method mover(direccion) {
 		self.validarMover(direccion)
 		const proxima = direccion.siguiente(self.position())
 		self.position(proxima)
 		poder.perfil(direccion)
-		
 	}
 
 	method enfrentarseAVisual(personaje) {
 		energia -= personaje.energiaQueSaca()
-		if(not self.tieneEnergiaParaMover()) {
-			//game.removeTickEvent("MOVER")
+		if (not self.tieneEnergiaParaMover()) {
+			// game.removeTickEvent("MOVER")
 			game.schedule(3000, { game.stop()})
-			game.schedule(1000, { sonidoGameover.reproducir() })
-		}	
+			game.schedule(1000, { sonidoGameover.reproducir()})
+		}
 	}
 
 	method activarSuperPoder() {
 		self.validarActivarSuperPoder()
 		poder = activado
-		game.schedule(5000, {poder = desactivado})
-		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
+		sonidoGameplay.parar()
+		sonidoSuperpoder.reproducir()
+		game.schedule(5000, { poder = desactivado
+			elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
+			sonidoGameplay2.reproducir()
+		})
+
 	}
 
 	method validarActivarSuperPoder() {
-		if(not self.tieneElementosNecesariosParaSuperPoder()) {
+		if (not self.tieneElementosNecesariosParaSuperPoder()) {
 			self.error("Todavia no puedo activar el poder!")
 		}
 	}
@@ -94,28 +97,34 @@ object carpincho {
 			self.error("Ya tengo este elemento!")
 		}
 	}
-	
+
 }
 
 object activado {
+
 	var property perfil = derecha
+
 	method imagen() {
 		return "super" + "-" + carpincho + "-" + self.perfil() + ".png"
 	}
-	
+
 	method estaActivo() {
 		return true
 	}
+
 }
 
 object desactivado {
-	var property perfil = derecha 
+
+	var property perfil = derecha
+
 	method imagen() {
 		return "" + carpincho + "-" + self.perfil() + ".png"
 	}
-	
+
 	method estaActivo() {
 		return false
 	}
+
 }
 
