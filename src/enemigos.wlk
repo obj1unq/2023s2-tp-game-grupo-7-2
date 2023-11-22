@@ -206,7 +206,7 @@ object autosManager inherits EnemigosManager(factories = [autoVioletaFactory, au
 object autosManagerDerecha inherits EnemigosManager(factories = [autoCelesteFactory, autoRojoFactory]) {
 	
 	override method limite() {
-		return 5
+		return 4
 	}
 	
 }

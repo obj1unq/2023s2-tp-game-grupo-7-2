@@ -63,9 +63,9 @@ object carpincho {
 		sonidoGameplay.parar()
 		sonidoSuperpoder.reproducir()
 		game.schedule(5000, { poder = desactivado
-			elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 			sonidoGameplay2.reproducir()
 		})
+		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 
 	}
 
@@ -77,10 +77,6 @@ object carpincho {
 
 	method tieneElementosNecesariosParaSuperPoder() {
 		return elementosParaSuperPoder.size() == 3
-	}
-
-	method moverConObjeto(objeto) {
-		self.position(objeto.position())
 	}
 
 	method agarrarElemento(elemento) {

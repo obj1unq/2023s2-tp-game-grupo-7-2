@@ -134,22 +134,6 @@ object ta {
 
 }
 
-
-
-object ln{
-	method generar(position) {
-		game.addVisual(new RioBotella(position=position))
-		troncosManager.iniciarGeneracionYMovimiento(3, position, izquierda)
-	}		
-}
-
-object rn{
-	method generar(position) {
-		game.addVisual(new Rio(position=position))
-		troncosManager.iniciarGeneracionYMovimiento(3, position, derecha)
-	}		
-}
-
 object k{
 	method generar(position) {
 		game.addVisual(new Vereda(position=position))
@@ -189,8 +173,8 @@ object mapa {
 	var celdas = [
 		[v,dv,dv,m,m,m,m,s,m,m,m,m,m,m,m],
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
-		[l,ta,r,r,l,r,l,r,l,r,r,r,l,r,ln],
-		[rn,ta,l,r,r,r,l,l,r,l,r,l,r,r,r],
+		[l,ta,r,r,l,r,l,r,l,r,r,r,l,r,l],
+		[r,ta,l,r,r,r,l,l,r,l,r,l,r,r,r],
 		[h,q,q,q,q,q,q,q,q,q,q,q,q,q,q],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
