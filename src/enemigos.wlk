@@ -10,8 +10,13 @@ class Enemigo {
 	method accionColision(personaje) {}
 	
 	method colision(personaje) {
-		personaje.enfrentarseAVisual(self)
+		if(not personaje.poder().estaActivo()) {
+			personaje.enfrentarseAVisual(self)
+			self.efectoDeEnfrentarse(personaje)
+		}
 	}
+	
+	method efectoDeEnfrentarse(personaje) {}
 	
 	method puedeOcupar(posicion) {
 		return tablero.pertenece(posicion)
@@ -31,25 +36,23 @@ class Enemigo {
 	}
 }
 
-class Perro inherits Enemigo {
+class AnimalDomestico inherits Enemigo {
 	 
-	
-	override method colision(personaje) {
-		super(personaje)
+	override method efectoDeEnfrentarse(personaje) {
 		manager.quitar(self)
 	}
 	
 }
 
-class PerroCallejero inherits Perro {
+class PerroCallejero inherits AnimalDomestico {
 	
-	override method colision(personaje) {
+	override method efectoDeEnfrentarse(personaje) {
 		super(personaje)
 		personaje.position(game.at(personaje.position().x(), personaje.position().y() - self.efectoDeEnfrentamiento(personaje.position())))	
 	}
 	
 	method efectoDeEnfrentamiento(posicionPersonaje) {
-		return if(posicionPersonaje.x() >= 3) 3 else posicionPersonaje.x()
+		return if(posicionPersonaje.y() >= 3) 3 else posicionPersonaje.y()
 	}
 }
 
@@ -114,14 +117,14 @@ object callejeroIzquierdaFactory {
 
 object domesticadoFactory {
 	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
 	}
 }
 
 
 object domesticadoIzquierdaFactory {
 	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
 	}
 }
 
@@ -163,10 +166,9 @@ object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, a
 class Auto inherits Enemigo {
 	
 	
-	override method colision(personaje) {
-		super(personaje)
+	override method efectoDeEnfrentarse(personaje) {
 		autosManager.quitar(self)
-		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))	
+		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))		
 	}
 	
 	method efectoDeEnfrentamiento(posicionPersonaje) {
@@ -190,7 +192,7 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 
 object gansoFactory {
 	method nuevo(position) {
-		return new Perro(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
+		return new AnimalDomestico(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
 	}
 }
 
