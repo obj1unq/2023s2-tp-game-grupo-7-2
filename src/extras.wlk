@@ -220,9 +220,8 @@ object salida inherits Extra(position = game.at(0, 0)) {
 	}
 
 	override method accionColision(personaje) {
-		game.schedule(4000, { game.stop()})
-		sonidoGameplay.parar()
-		sonidoWinner.reproducir()
+		game.schedule(3000, { game.stop()})
+		game.schedule(1000, { sonidoWinner.reproducir() })
 	}
 
 }

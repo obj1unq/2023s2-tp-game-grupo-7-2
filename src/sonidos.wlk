@@ -5,8 +5,8 @@ class Sonido{
 	const property sonido
 	
 	method reproducir(){
-		game.schedule(3000, {sonido.play()})
-		sonido.shouldLoop(true)
+		game.schedule(500, {sonido.play()})
+		//sonido.shouldLoop(true)
 	}
 	
 	method parar(){
@@ -15,7 +15,11 @@ class Sonido{
 }
 
 object sonidoGameplay inherits Sonido(sonido = game.sound("gameplay.mp3")){
-
+	
+	override method reproducir(){
+		super()
+		sonido.shouldLoop(true)
+	}
 }
 
 object sonidoGameover inherits Sonido(sonido = game.sound("gameover.mp3")){
