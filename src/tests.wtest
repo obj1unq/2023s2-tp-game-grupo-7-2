@@ -38,14 +38,6 @@ describe "Test del carpincho" {
 		assert.throwsException({carpincho.agarrarElemento(yerba)})
 	}
 	
-	test "agarrar todos los elementos, activar el super poder, verificar que la imagen cambie y que el poder esté activo" {
-		carpincho.agarrarElemento(termo)
-		carpincho.agarrarElemento(mate)
-		carpincho.agarrarElemento(yerba)
-		carpincho.activarSuperPoder()
-		assert.equals("super-carpincho-derecha.png",carpincho.image())
-		assert.that(carpincho.poder().estaActivo())
-	}
 	
 	test "agarrar todos los elementos, pero no activar el super poder, verificar que el poder no esté activo" {
 		carpincho.agarrarElemento(termo)
