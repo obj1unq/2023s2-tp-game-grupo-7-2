@@ -30,15 +30,6 @@ object h {
 
 }
 
-object hi {
-
-	method generar(position) {
-		game.addVisual(new Piso(position = position))
-		humanosManagerIzquierda.iniciarGeneracionYMovimiento(3, position, izquierda)
-	}
-
-}
-
 object p {
 
 	method generar(position) {
@@ -105,15 +96,6 @@ object fg {
 	method generar(position) {
 		game.addVisual(new Asfalto(position = position))
 		autosManager.iniciarGeneracionYMovimiento(4, position, izquierda)
-	}
-
-}
-
-object fa {
-
-	method generar(position) {
-		game.addVisual(new Asfalto(position = position))
-		autosManagerDerecha.iniciarGeneracionYMovimiento(4, position, derecha)
 	}
 
 }
@@ -200,11 +182,9 @@ object mapa {
 		[n,n,n,n,n,n,n,n,n,n,n,n,n,n,gn],
 		[l,ta,r,r,l,r,l,r,l,r,r,r,l,r,ln],
 		[rn,ta,l,r,r,r,l,l,r,l,r,l,r,r,r],
-		[q,q,q,q,q,q,q,q,q,q,q,q,q,q,hi],
 		[h,q,q,q,q,q,q,q,q,q,q,q,q,q,q],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
-		[fa,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
 		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,pi],
