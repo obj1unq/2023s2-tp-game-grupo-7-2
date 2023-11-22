@@ -78,7 +78,7 @@ object d {
 object dv {
 
 	method generar(position) {
-		game.addVisual(new Pasto(position = position))
+		game.addVisual(new PastoConVida(position = position))
 	}
 
 }

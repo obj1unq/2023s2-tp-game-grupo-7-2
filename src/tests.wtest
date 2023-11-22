@@ -32,6 +32,28 @@ describe "Test del carpincho" {
 		assert.notThat(carpincho.tieneElementosNecesariosParaSuperPoder())
 	}
 	
+	test "recolectar elementos que ya recolectó y no poder agarrarlos" {
+		carpincho.agarrarElemento(mate)
+		carpincho.agarrarElemento(yerba)
+		assert.throwsException({carpincho.agarrarElemento(yerba)})
+	}
+	
+	test "agarrar todos los elementos, activar el super poder, verificar que la imagen cambie y que el poder esté activo" {
+		carpincho.agarrarElemento(termo)
+		carpincho.agarrarElemento(mate)
+		carpincho.agarrarElemento(yerba)
+		carpincho.activarSuperPoder()
+		assert.equals("super-carpincho-derecha.png",carpincho.image())
+		assert.that(carpincho.poder().estaActivo())
+	}
+	
+	test "agarrar todos los elementos, pero no activar el super poder, verificar que el poder no esté activo" {
+		carpincho.agarrarElemento(termo)
+		carpincho.agarrarElemento(mate)
+		carpincho.agarrarElemento(yerba)
+		assert.notThat(carpincho.poder().estaActivo())
+	}
+	
 	test "al enfrentarse con un perro callejero lo lanza 3 posiciones y le quita 100 de vida" {
 		assert.equals(100, perroCallejero.energiaQueSaca())
 		assert.equals(3, perroCallejero.efectoDeEnfrentamiento(game.at(5, 5)))
