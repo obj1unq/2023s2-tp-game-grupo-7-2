@@ -41,7 +41,7 @@ object tablero {
 	}
 	
 	method puedeOcupar(position) {
-		return self.pertenece(position) and not self.haySolido(position)
+		return self.pertenece(position) and not self.haySolido(position) 
 	}
 	
 	method haySolido(position) {

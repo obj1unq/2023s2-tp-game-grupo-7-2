@@ -29,6 +29,14 @@ class Pasto inherits Extra {
 
 }
 
+class PastoConVida inherits Pasto {
+	
+	override method solido() {
+		return true
+	}
+
+}
+
 class Tierra inherits Extra {
 
 	override method image() {

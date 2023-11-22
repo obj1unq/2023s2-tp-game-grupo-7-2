@@ -20,7 +20,7 @@ program juego {
 	
 	mapa.generar()
 	
-	
+	 
 	keyboard.up().onPressDo({carpincho.mover(arriba)})	
 	keyboard.down().onPressDo({carpincho.mover(abajo)})
 	keyboard.left().onPressDo({carpincho.mover(izquierda)})
