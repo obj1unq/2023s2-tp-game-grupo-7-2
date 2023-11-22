@@ -36,7 +36,7 @@ class Enemigo {
 	}
 }
 
-class Perro inherits Enemigo {
+class AnimalDomestico inherits Enemigo {
 	 
 	override method efectoDeEnfrentarse(personaje) {
 		manager.quitar(self)
@@ -44,7 +44,7 @@ class Perro inherits Enemigo {
 	
 }
 
-class PerroCallejero inherits Perro {
+class PerroCallejero inherits AnimalDomestico {
 	
 	override method efectoDeEnfrentarse(personaje) {
 		super(personaje)
@@ -52,7 +52,7 @@ class PerroCallejero inherits Perro {
 	}
 	
 	method efectoDeEnfrentamiento(posicionPersonaje) {
-		return if(posicionPersonaje.x() >= 3) 3 else posicionPersonaje.x()
+		return if(posicionPersonaje.y() >= 3) 3 else posicionPersonaje.y()
 	}
 }
 
@@ -117,14 +117,14 @@ object callejeroIzquierdaFactory {
 
 object domesticadoFactory {
 	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
 	}
 }
 
 
 object domesticadoIzquierdaFactory {
 	method nuevo(position) {
-		return new Perro(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
 	}
 }
 
@@ -192,7 +192,7 @@ object autosManager inherits EnemigosManager(factories = [autoFactory]) {
 
 object gansoFactory {
 	method nuevo(position) {
-		return new Perro(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
+		return new AnimalDomestico(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
 	}
 }
 
