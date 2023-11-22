@@ -78,11 +78,6 @@ class EnemigosManager {
 		game.onTick(1000, "MOVER", { generados.forEach({ enemigo => enemigo.mover(direccion)}) })
 	}
 	
-	method cambiarGeneracion(segundos, position) {
-		game.removeTickEvent("ENEMIGOS")
-		self.iniciarGeneracion(segundos, position)
-	}
-	
 	method generar(position) {
 		if(generados.size() < self.limite() ) {
 			const enemigo = self.seleccionarFactory().nuevo(position) 		
@@ -176,13 +171,39 @@ class Auto inherits Enemigo {
 	}
 }
 
-object autoFactory {
+object autoVioletaFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto.gif", energiaQueSaca = 200, manager = autosManager)
+		return new Auto(position = position, image = "auto-violeta-izquierda.gif", energiaQueSaca = 200, manager = autosManager)
 	}
 }
 
-object autosManager inherits EnemigosManager(factories = [autoFactory]) {
+object autoAzulFactory {
+	method nuevo(position) {
+		return new Auto(position = position, image = "auto-azul-izquierda.png", energiaQueSaca = 200, manager = autosManager)
+	}
+}
+
+object autoCelesteFactory {
+	method nuevo(position) {
+		return new Auto(position = position, image = "auto-celeste-derecha.png", energiaQueSaca = 200, manager = autosManagerDerecha)
+	}
+}
+
+object autoRojoFactory {
+	method nuevo(position) {
+		return new Auto(position = position, image = "auto-rojo-derecha.png", energiaQueSaca = 200, manager = autosManagerDerecha)
+	}
+}
+
+object autosManager inherits EnemigosManager(factories = [autoVioletaFactory, autoAzulFactory]) {
+	
+	override method limite() {
+		return 5
+	}
+	
+}
+
+object autosManagerDerecha inherits EnemigosManager(factories = [autoCelesteFactory, autoRojoFactory]) {
 	
 	override method limite() {
 		return 5

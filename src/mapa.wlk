@@ -91,11 +91,20 @@ object f {
 
 }
 
-object fg {
+object fi {
 
 	method generar(position) {
 		game.addVisual(new Asfalto(position = position))
 		autosManager.iniciarGeneracionYMovimiento(4, position, izquierda)
+	}
+
+}
+
+object fd {
+
+	method generar(position) {
+		game.addVisual(new Asfalto(position = position))
+		autosManagerDerecha.iniciarGeneracionYMovimiento(4, position, derecha)
 	}
 
 }
@@ -185,8 +194,8 @@ object mapa {
 		[h,q,q,q,q,q,q,q,q,q,q,q,q,q,q],
 		[d,d,d,d,d,d,d,d,d,d,d,d,d,d,d],
 		[p,k,k,k,k,k,k,k,k,k,k,k,k,k,k],
-		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fg],
-		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+		[f,f,f,f,f,f,f,f,f,f,f,f,f,f,fi],
+		[fd,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
 		[k,k,k,k,k,k,k,k,k,k,k,k,k,k,pi],
 		[d,d,d,d,d,d,d,d,a,d,d,d,d,d,d]	
 	].reverse() 

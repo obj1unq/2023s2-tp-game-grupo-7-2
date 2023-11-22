@@ -30,13 +30,9 @@ object carpincho {
 		return energia > self.energiaParaMover()
 	}
 
-	method puedeOcupar(posicion) {
-		return tablero.puedeOcupar(posicion)
-	}
-
 	method sePuedeMover(direccion) {
 		const proxima = direccion.siguiente(self.position())
-		return self.puedeOcupar(proxima) and self.tieneEnergiaParaMover()
+		return tablero.puedeOcupar(proxima) and self.tieneEnergiaParaMover()
 	}
 
 	method validarMover(direccion) {
