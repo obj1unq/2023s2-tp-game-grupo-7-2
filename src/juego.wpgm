@@ -16,6 +16,5 @@ program juego {
 	
 	tablero.iniciar()
 	
-	
 	game.start()
 }

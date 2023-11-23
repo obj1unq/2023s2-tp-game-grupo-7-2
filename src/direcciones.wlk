@@ -60,10 +60,14 @@ object tablero {
 
 }
 
-object pantallaInicio {
+class Pantalla {
 	const property position = game.at(0, 0)
 	
-	method image() {
-		return "pantalla-inicio.png"
-	}
+	const property image
 }
+
+object pantallaInicio inherits Pantalla(image = "pantalla-inicio.png") {}
+
+object pantallaGanador inherits Pantalla(image = "pantalla-ganador.png") {}
+
+object pantallaPerdedor inherits Pantalla(image = "pantalla-perdedor.png") {}
