@@ -1,6 +1,7 @@
 import wollok.game.*
 import mapa.*
 import pantallas.*
+import sonidos.*
 
 object tablero {
 

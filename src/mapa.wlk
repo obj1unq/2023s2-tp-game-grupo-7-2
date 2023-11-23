@@ -5,6 +5,7 @@ import enemigos.*
 import direcciones.*
 import obstaculos.*
 import elementosPoder.*
+import sonidos.*
 
 object _ {
 
@@ -188,7 +189,7 @@ object mapa {
 	
 	method generar() {
 		game.clear()
-		
+
 		game.width(15)
 		game.height(11)
 		game.cellSize(70)
@@ -212,13 +213,13 @@ object mapa {
 	}
 	
 	method comenzar() {
+		sonidoGameplay.reproducir()
 		
 		keyboard.up().onPressDo({carpincho.mover(arriba)})	
 		keyboard.down().onPressDo({carpincho.mover(abajo)})
 		keyboard.left().onPressDo({carpincho.mover(izquierda)})
 		keyboard.right().onPressDo({carpincho.mover(derecha)})
 		keyboard.x().onPressDo({carpincho.activarSuperPoder()})
-		
 		
 		game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 		game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})

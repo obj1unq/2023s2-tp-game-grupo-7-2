@@ -11,8 +11,6 @@ import tablero.*
 
 program juego {
 	
-	//sonidoGameplay.reproducir()
-	
 	game.title("El carpincho de Nordelta")
 	
 	tablero.iniciar()

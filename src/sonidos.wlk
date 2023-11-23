@@ -5,8 +5,8 @@ class Sonido{
 	const property sonido
 	
 	method reproducir(){
-		game.schedule(500, {sonido.play()})
-		//sonido.shouldLoop(true)
+		sonidoGameplay.parar()
+		sonido.play()
 	}
 	
 	method parar(){
@@ -17,7 +17,7 @@ class Sonido{
 object sonidoGameplay inherits Sonido(sonido = game.sound("gameplay.mp3")){
 	
 	override method reproducir(){
-		super()
+		sonido.play()
 		sonido.shouldLoop(true)
 	}
 }
@@ -25,34 +25,14 @@ object sonidoGameplay inherits Sonido(sonido = game.sound("gameplay.mp3")){
 object sonidoGameplay2 inherits Sonido(sonido = game.sound("gameplay2.mp3")){
 	
 	override method reproducir(){
-		super()
+		sonido.play()
 		sonido.shouldLoop(true)
 	}
 }
 
-object sonidoGameover inherits Sonido(sonido = game.sound("gameover.mp3")){
-	
-	override method reproducir(){
-		super()
-		sonidoGameplay.parar()
-		
-	}
-}
+object sonidoGameover inherits Sonido(sonido = game.sound("gameover.mp3")){}
 
-object sonidoWinner inherits Sonido(sonido = game.sound("winner.mp3")){
-	
-	override method reproducir(){
-		super()
-		sonidoGameplay.parar()
-	}
-}
+object sonidoWinner inherits Sonido(sonido = game.sound("winner.mp3")){}
 
-object sonidoSuperpoder inherits Sonido(sonido = game.sound("superpoder.mp3")){
-	
-		override method reproducir(){
-		super()
-		sonidoGameplay.parar()
-	}
-	
-	
-}
+object sonidoSuperpoder inherits Sonido(sonido = game.sound("superpoder.mp3")){}
+
