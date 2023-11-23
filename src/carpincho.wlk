@@ -41,25 +41,23 @@ object carpincho {
 		return tablero.puedeOcupar(proxima) and self.tieneEnergiaParaMover()
 	}
 
-	method validarMover(direccion) {
-		if (not self.sePuedeMover(direccion)) {
-			self.error("No puedo moverme ahí")
-		}
-	}
-
 	method mover(direccion) {
-		self.validarMover(direccion)
-		const proxima = direccion.siguiente(self.position())
-		self.position(proxima)
-		poder.perfil(direccion)
+		if (not self.sePuedeMover(direccion)) {
+			game.say(self, "No puedo ir ahí")
+		} else {
+			const proxima = direccion.siguiente(self.position())
+			self.position(proxima)
+			poder.perfil(direccion)
+		
+		}
 	}
 
 	method enfrentarseAVisual(personaje) {
 		energia -= personaje.energiaQueSaca()
 		if (not self.tieneEnergiaParaMover()) {
 			// game.removeTickEvent("MOVER")
-			game.schedule(3000, { game.stop()})
-			game.schedule(1000, { sonidoGameover.reproducir()})
+			//game.schedule(3000, { game.stop()})
+			game.schedule(1000, { sonidoGameover.reproducir()  tablero.perdedor()})
 			energia = 0
 		}
 	}
