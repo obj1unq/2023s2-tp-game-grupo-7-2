@@ -1,5 +1,6 @@
 import wollok.game.*
 import direcciones.*
+import tablero.*
 
 class Enemigo {
 	var property position
