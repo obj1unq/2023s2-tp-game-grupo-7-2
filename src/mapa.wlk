@@ -26,7 +26,7 @@ object h {
 
 	method generar(position) {
 		game.addVisual(new Piso(position = position))
-		humanosManager.iniciarGeneracionYMovimiento(3, position, derecha)
+		humanoManager.iniciarGeneracionYMovimiento(3, position, derecha)
 	}
 
 }
@@ -35,7 +35,7 @@ object p {
 
 	method generar(position) {
 		game.addVisual(new Vereda(position = position))
-		perrosManager.iniciarGeneracionYMovimiento(2, position, derecha)
+		perroManager.iniciarGeneracionYMovimiento(2, position, derecha)
 	}
 
 }
@@ -44,7 +44,7 @@ object pi {
 
 	method generar(position) {
 		game.addVisual(new Vereda(position = position))
-		perrosManagerIzquierda.iniciarGeneracionYMovimiento(2, position, izquierda)
+		perroManagerIzquierda.iniciarGeneracionYMovimiento(2, position, izquierda)
 	}
 
 }
@@ -96,7 +96,7 @@ object fi {
 
 	method generar(position) {
 		game.addVisual(new Asfalto(position = position))
-		autosManager.iniciarGeneracionYMovimiento(4, position, izquierda)
+		autoManager.iniciarGeneracionYMovimiento(4, position, izquierda)
 	}
 
 }
@@ -105,7 +105,7 @@ object fd {
 
 	method generar(position) {
 		game.addVisual(new Asfalto(position = position))
-		autosManagerDerecha.iniciarGeneracionYMovimiento(4, position, derecha)
+		autoManagerDerecha.iniciarGeneracionYMovimiento(4, position, derecha)
 	}
 
 }
@@ -157,7 +157,7 @@ object m{
 object gn{
 	method generar(position) {
 		game.addVisual(new Tierra(position=position))
-		gansosManager.iniciarGeneracionYMovimiento(3, position, izquierda)
+		gansoManager.iniciarGeneracionYMovimiento(3, position, izquierda)
 	}
 }
 

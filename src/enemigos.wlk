@@ -57,7 +57,7 @@ class PerroCallejero inherits AnimalDomestico {
 	}
 }
 
-class EnemigosManager {
+class EnemigoManager {
 	const generados = #{}
 	const factories
 	
@@ -100,38 +100,38 @@ class EnemigosManager {
 object callejeroFactory {
 	
 	method nuevo(position) {
-		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManager)
+		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perroManager)
 	}
 }
 
 object callejeroIzquierdaFactory {
 	
 	method nuevo(position) {
-		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perrosManagerIzquierda)
+		return new PerroCallejero(energiaQueSaca = 100, position = position, image = "perro-callejero.png", manager = perroManagerIzquierda)
 	}
 }
 
 object domesticadoFactory {
 	method nuevo(position) {
-		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perrosManager)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado.png", manager = perroManager)
 	}
 }
 
 
 object domesticadoIzquierdaFactory {
 	method nuevo(position) {
-		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perrosManagerIzquierda)
+		return new AnimalDomestico(energiaQueSaca = 50, position = position, image = "perro-domesticado-izquierda.png", manager = perroManagerIzquierda)
 	}
 }
 
-object perrosManager inherits EnemigosManager(factories = [callejeroFactory, domesticadoFactory]) {
+object perroManager inherits EnemigoManager(factories = [callejeroFactory, domesticadoFactory]) {
 	
 	override method limite() {
 		return 10
 	}
 }
 
-object perrosManagerIzquierda inherits EnemigosManager(factories = [callejeroIzquierdaFactory, domesticadoIzquierdaFactory]) {
+object perroManagerIzquierda inherits EnemigoManager(factories = [callejeroIzquierdaFactory, domesticadoIzquierdaFactory]) {
 	
 	override method limite() {
 		return 9
@@ -141,17 +141,17 @@ object perrosManagerIzquierda inherits EnemigosManager(factories = [callejeroIzq
 object alcoholicaFactory {
 	
 	method nuevo(position) {
-		return new Enemigo(position = position, energiaQueSaca = 4000, image = "humana-alcohol.png", manager = humanosManager)
+		return new Enemigo(position = position, energiaQueSaca = 4000, image = "humana-alcohol.png", manager = humanoManager)
 	}
 }
 
 object antiCarpiFactory {
 	method nuevo(position) {
-		return new Enemigo(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000, manager = humanosManager)
+		return new Enemigo(position = position, image = "humana-anti-carpi.png", energiaQueSaca = 4000, manager = humanoManager)
 	}
 }
 
-object humanosManager inherits EnemigosManager(factories = [alcoholicaFactory, antiCarpiFactory]) {
+object humanoManager inherits EnemigoManager(factories = [alcoholicaFactory, antiCarpiFactory]) {
 	
 	override method limite() {
 		return 3
@@ -163,7 +163,7 @@ class Auto inherits Enemigo {
 	
 	
 	override method efectoDeEnfrentarse(personaje) {
-		autosManager.quitar(self)
+		autoManager.quitar(self)
 		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))		
 	}
 	
@@ -174,29 +174,29 @@ class Auto inherits Enemigo {
 
 object autoVioletaFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-violeta-izquierda.gif", energiaQueSaca = 200, manager = autosManager)
+		return new Auto(position = position, image = "auto-violeta-izquierda.gif", energiaQueSaca = 200, manager = autoManager)
 	}
 }
 
 object autoAzulFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-azul-izquierda.png", energiaQueSaca = 200, manager = autosManager)
+		return new Auto(position = position, image = "auto-azul-izquierda.png", energiaQueSaca = 200, manager = autoManager)
 	}
 }
 
 object autoCelesteFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-celeste-derecha.png", energiaQueSaca = 200, manager = autosManagerDerecha)
+		return new Auto(position = position, image = "auto-celeste-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
 	}
 }
 
 object autoRojoFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-rojo-derecha.png", energiaQueSaca = 200, manager = autosManagerDerecha)
+		return new Auto(position = position, image = "auto-rojo-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
 	}
 }
 
-object autosManager inherits EnemigosManager(factories = [autoVioletaFactory, autoAzulFactory]) {
+object autoManager inherits EnemigoManager(factories = [autoVioletaFactory, autoAzulFactory]) {
 	
 	override method limite() {
 		return 5
@@ -204,7 +204,7 @@ object autosManager inherits EnemigosManager(factories = [autoVioletaFactory, au
 	
 }
 
-object autosManagerDerecha inherits EnemigosManager(factories = [autoCelesteFactory, autoRojoFactory]) {
+object autoManagerDerecha inherits EnemigoManager(factories = [autoCelesteFactory, autoRojoFactory]) {
 	
 	override method limite() {
 		return 4
@@ -214,11 +214,11 @@ object autosManagerDerecha inherits EnemigosManager(factories = [autoCelesteFact
 
 object gansoFactory {
 	method nuevo(position) {
-		return new AnimalDomestico(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansosManager)
+		return new AnimalDomestico(position = position, image = "ganso.png", energiaQueSaca = 200, manager = gansoManager)
 	}
 }
 
-object gansosManager inherits EnemigosManager(factories = [gansoFactory]) {
+object gansoManager inherits EnemigoManager(factories = [gansoFactory]) {
 	
 	override method limite() {
 		return 4

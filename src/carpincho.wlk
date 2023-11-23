@@ -2,6 +2,7 @@ import wollok.game.*
 import direcciones.*
 import sonidos.*
 import extras.*
+import tablero.*
 
 object carpincho {
 

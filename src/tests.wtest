@@ -9,8 +9,8 @@ import elementosPoder.*
 
 describe "Test del carpincho" {
 	
-	const perroCallejero = new PerroCallejero(position = game.at(0, 0), energiaQueSaca = 100, image = "perro-callejero.png", manager = perrosManager)
-	const humana = new Enemigo(position = game.at(3,0), energiaQueSaca = 4000, image = "humana-acohol.png", manager = humanosManager)
+	const perroCallejero = new PerroCallejero(position = game.at(0, 0), energiaQueSaca = 100, image = "perro-callejero.png", manager = perroManager)
+	const humana = new Enemigo(position = game.at(3,0), energiaQueSaca = 4000, image = "humana-acohol.png", manager = humanoManager)
 	
 	test "position inicial del carpincho" {
 		assert.equals(game.at(0,0), carpincho.position())
