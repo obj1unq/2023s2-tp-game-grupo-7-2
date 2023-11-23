@@ -8,6 +8,14 @@ import mapa.*
 import elementosPoder.*
 
 describe "Test del carpincho" {
+
+	
+	/*method initialize() {
+		game.clear()
+			game.width(15)
+			game.height(11)
+			game.cellSize(70)
+	}*/
 	
 	const perroCallejero = new PerroCallejero(position = game.at(0, 0), energiaQueSaca = 100, image = "perro-callejero.png", manager = perroManager)
 	const humana = new Enemigo(position = game.at(3,0), energiaQueSaca = 4000, image = "humana-acohol.png", manager = humanoManager)

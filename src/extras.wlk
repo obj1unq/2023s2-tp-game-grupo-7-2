@@ -19,6 +19,8 @@ class Extra {
 	method solido() {
 		return false
 	}
+	
+	method reiniciar() {}
 
 }
 
@@ -122,7 +124,9 @@ object salida inherits Extra(position = game.at(0, 0)) {
 
 	override method colision(personaje) {
 		//game.schedule(3000, { game.stop()})
-		game.schedule(1000, { sonidoWinner.reproducir() tablero.ganador()})
+		game.schedule(1000, { //sonidoWinner.reproducir() 
+			tablero.ganador()
+		})
 		
 	}
 

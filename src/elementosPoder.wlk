@@ -3,9 +3,13 @@ import randomizer.*
 
 object elementosMateManager {
 	
-	var generados = #{}
+	const generados = #{}
 	
 	const elementos = [mate, yerba, termo]
+	
+	method reiniciar() {
+		generados.clear()
+	}
 	
 	method generar() {
 		if(generados.size() == 0 ) { 		

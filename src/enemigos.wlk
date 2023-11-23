@@ -61,6 +61,10 @@ class EnemigoManager {
 	const generados = #{}
 	const factories
 	
+	method reiniciar() {
+		generados.clear()
+	}
+	
 	
 	method seleccionarFactory() {
 		return factories.anyOne() 

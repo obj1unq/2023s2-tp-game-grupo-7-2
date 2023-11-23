@@ -6,6 +6,7 @@ import direcciones.*
 import obstaculos.*
 import elementosPoder.*
 import sonidos.*
+import tablero.*
 
 object _ {
 
@@ -17,8 +18,10 @@ object _ {
 object a {
 
 	method generar(position) {
+		carpincho.reiniciar()
 		game.addVisual(new Pasto(position = position))
 		carpincho.position(position)
+		
 	}
 
 }
@@ -26,6 +29,7 @@ object a {
 object h {
 
 	method generar(position) {
+		humanoManager.reiniciar()
 		game.addVisual(new Piso(position = position))
 		humanoManager.iniciarGeneracionYMovimiento(3, position, derecha)
 	}
@@ -35,6 +39,7 @@ object h {
 object p {
 
 	method generar(position) {
+		perroManager.reiniciar()
 		game.addVisual(new Vereda(position = position))
 		perroManager.iniciarGeneracionYMovimiento(2, position, derecha)
 	}
@@ -44,6 +49,7 @@ object p {
 object pi {
 
 	method generar(position) {
+		perroManagerIzquierda.reiniciar()
 		game.addVisual(new Vereda(position = position))
 		perroManagerIzquierda.iniciarGeneracionYMovimiento(2, position, izquierda)
 	}
@@ -96,6 +102,7 @@ object f {
 object fi {
 
 	method generar(position) {
+		autoManager.reiniciar()
 		game.addVisual(new Asfalto(position = position))
 		autoManager.iniciarGeneracionYMovimiento(4, position, izquierda)
 	}
@@ -105,6 +112,7 @@ object fi {
 object fd {
 
 	method generar(position) {
+		autoManagerDerecha.reiniciar()
 		game.addVisual(new Asfalto(position = position))
 		autoManagerDerecha.iniciarGeneracionYMovimiento(4, position, derecha)
 	}
@@ -157,6 +165,7 @@ object m{
 
 object gn{
 	method generar(position) {
+		gansoManager.reiniciar()
 		game.addVisual(new Tierra(position=position))
 		gansoManager.iniciarGeneracionYMovimiento(3, position, izquierda)
 	}
@@ -188,11 +197,9 @@ object mapa {
 	
 	
 	method generar() {
-		game.clear()
-
-		game.width(15)
-		game.height(11)
-		game.cellSize(70)
+		elementosMateManager.reiniciar()
+		
+		tablero.configurar()
 		
 		game.width(celdas.anyOne().size())
 		game.height(celdas.size())
@@ -213,7 +220,8 @@ object mapa {
 	}
 	
 	method comenzar() {
-		sonidoGameplay.reproducir()
+		//sonidoGameplay.reproducir()
+		
 		
 		keyboard.up().onPressDo({carpincho.mover(arriba)})	
 		keyboard.down().onPressDo({carpincho.mover(abajo)})
@@ -226,5 +234,6 @@ object mapa {
 		
 		game.schedule(4000, {elementosMateManager.generar()})
 	}
+
 	
 }

@@ -18,33 +18,32 @@ object tablero {
 		return game.getObjectsIn(position).any({elemento => elemento.solido()})
 	}
 	
-	method iniciar() {
+	method configurar() {
+		game.clear()
+		
 		game.width(15)
 		game.height(11)
 		game.cellSize(70)
+	}
+	
+	method iniciar() {
+		self.configurar()
+		
 		game.addVisual(pantallaInicio)
 		keyboard.enter().onPressDo({mapa.generar()})
 	}
 	
 	method perdedor() {
-		game.clear()
+		self.configurar()
 		
-		
-		game.width(15)
-		game.height(11)
-		game.cellSize(70)
 		game.addVisual(pantallaPerdedor)
 		keyboard.enter().onPressDo({mapa.generar()})
 		keyboard.space().onPressDo({game.stop()})
 	}
 	
 	method ganador() {
-		game.clear()
+		self.configurar()
 		
-		
-		game.width(15)
-		game.height(11)
-		game.cellSize(70)
 		game.addVisual(pantallaGanador)
 		keyboard.enter().onPressDo({mapa.generar()})
 		keyboard.space().onPressDo({game.stop()})

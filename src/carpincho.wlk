@@ -11,6 +11,13 @@ object carpincho {
 	var energia = 1000
 	const elementosParaSuperPoder = #{}
 	var poder = desactivado
+	
+	
+	method reiniciar() {
+		energia = 1000
+		elementosParaSuperPoder.clear()
+		poder = desactivado
+	}
 
 	method image() {
 		return poder.imagen()
@@ -57,18 +64,20 @@ object carpincho {
 		if (not self.tieneEnergiaParaMover()) {
 			// game.removeTickEvent("MOVER")
 			//game.schedule(3000, { game.stop()})
-			game.schedule(1000, { sonidoGameover.reproducir()  tablero.perdedor()})
-			energia = 0
+			game.schedule(1000, { //sonidoGameover.reproducir()  
+				tablero.perdedor()
+			})
+			//energia = 0
 		}
 	}
 
 	method activarSuperPoder() {
 		self.validarActivarSuperPoder()
 		poder = activado
-		sonidoGameplay.parar()
-		sonidoSuperpoder.reproducir()
+		//sonidoGameplay.parar()
+		//sonidoSuperpoder.reproducir()
 		game.schedule(5000, { poder = desactivado
-			sonidoGameplay2.reproducir()
+			//sonidoGameplay2.reproducir()
 		})
 		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 
