@@ -4,6 +4,8 @@ import pantallas.*
 import sonidos.*
 
 object tablero {
+	
+	var property sonido = sonidoGameplay
 
 	method pertenece(position) {
 		return position.x().between(0, game.width() - 1) and 
@@ -35,7 +37,8 @@ object tablero {
 	
 	method perdedor() {
 		self.configurar()
-		
+		sonido = sonidoGameover
+		game.schedule(500, {sonido.reproducir()})
 		game.addVisual(pantallaPerdedor)
 		keyboard.enter().onPressDo({mapa.generar()})
 		keyboard.space().onPressDo({game.stop()})
@@ -43,7 +46,8 @@ object tablero {
 	
 	method ganador() {
 		self.configurar()
-		
+		sonido = sonidoWinner
+		game.schedule(500, {sonido.reproducir()})
 		game.addVisual(pantallaGanador)
 		keyboard.enter().onPressDo({mapa.generar()})
 		keyboard.space().onPressDo({game.stop()})

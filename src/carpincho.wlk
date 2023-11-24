@@ -75,9 +75,9 @@ object carpincho {
 		self.validarActivarSuperPoder()
 		poder = activado
 		//sonidoGameplay.parar()
-		//sonidoSuperpoder.reproducir()
+		sonidoSuperpoder.reproducir()
 		game.schedule(5000, { poder = desactivado
-			//sonidoGameplay2.reproducir()
+			sonidoGameplay.reproducir()
 		})
 		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 

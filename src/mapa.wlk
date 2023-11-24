@@ -179,7 +179,7 @@ object q {
 
 
 object mapa {
-	
+	const property sonido = sonidoGameplay
 	
 	var celdas = [
 		[v,dv,dv,m,m,m,m,s,m,m,m,m,m,m,m],
@@ -220,7 +220,7 @@ object mapa {
 	}
 	
 	method comenzar() {
-		//sonidoGameplay.reproducir()
+		game.schedule(500, {sonido.reproducir()})
 		
 		
 		keyboard.up().onPressDo({carpincho.mover(arriba)})	
