@@ -167,7 +167,7 @@ class Auto inherits Enemigo {
 	
 	
 	override method efectoDeEnfrentarse(personaje) {
-		autoManager.quitar(self)
+		manager.quitar(self)
 		personaje.position(game.at(personaje.position().x() - self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))		
 	}
 	
