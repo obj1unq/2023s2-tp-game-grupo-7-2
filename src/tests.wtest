@@ -66,7 +66,7 @@ describe "Test del carpincho" {
 		assert.equals(game.at(3,0), carpincho.position())
 		assert.equals(1000, carpincho.energia())
 		carpincho.enfrentarseAVisual(humana)
-		assert.equals(0, carpincho.energia())
+		assert.equals(-3000, carpincho.energia())
 	}
 }
 
