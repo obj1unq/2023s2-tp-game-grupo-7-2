@@ -176,6 +176,14 @@ class Auto inherits Enemigo {
 	}
 }
 
+class AutoDerecha inherits Auto {
+	
+	override method efectoDeEnfrentarse(personaje) {
+		manager.quitar(self)
+		personaje.position(game.at(personaje.position().x() + self.efectoDeEnfrentamiento(personaje.position()), personaje.position().y()))		
+	}
+}
+
 object autoVioletaFactory {
 	method nuevo(position) {
 		return new Auto(position = position, image = "auto-violeta-izquierda.gif", energiaQueSaca = 200, manager = autoManager)
@@ -190,13 +198,13 @@ object autoAzulFactory {
 
 object autoCelesteFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-celeste-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
+		return new AutoDerecha(position = position, image = "auto-celeste-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
 	}
 }
 
 object autoRojoFactory {
 	method nuevo(position) {
-		return new Auto(position = position, image = "auto-rojo-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
+		return new AutoDerecha(position = position, image = "auto-rojo-derecha.png", energiaQueSaca = 200, manager = autoManagerDerecha)
 	}
 }
 

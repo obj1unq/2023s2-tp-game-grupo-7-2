@@ -228,6 +228,7 @@ object mapa {
 		keyboard.left().onPressDo({carpincho.mover(izquierda)})
 		keyboard.right().onPressDo({carpincho.mover(derecha)})
 		keyboard.x().onPressDo({carpincho.activarSuperPoder()})
+		keyboard.e().onPressDo({game.say(carpincho, "Mi energia es: " + carpincho.energia().toString())})
 		
 		game.onCollideDo(carpincho, {algo => algo.colision(carpincho)})
 		game.whenCollideDo(carpincho, {algo => algo.accionColision(carpincho)})
