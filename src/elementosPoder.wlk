@@ -3,16 +3,18 @@ import randomizer.*
 
 object elementosMateManager {
 	
-	const generados = #{}
+	var generados = #{}
 	
 	const elementos = [mate, yerba, termo]
 	
 	method reiniciar() {
 		generados.clear()
+		elementos.forEach({elemento => elemento.position(randomizer.emptyPosition())})
 	}
 	
 	method generar() {
-		if(generados.size() == 0 ) { 		
+		
+		if(generados.isEmpty()) { 		
 			game.addVisual(mate)	
 			game.addVisual(yerba)
 			game.addVisual(termo)
@@ -27,7 +29,7 @@ object elementosMateManager {
 }
 
 class ElementosMate {
-	const property position
+	var property position
 	
 	method image() {
 		return "mate.png"

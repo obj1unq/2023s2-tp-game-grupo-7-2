@@ -72,36 +72,33 @@ object carpincho {
 	}
 
 	method activarSuperPoder() {
-		self.validarActivarSuperPoder()
-		poder = activado
-		//sonidoGameplay.parar()
-		//sonidoSuperpoder.reproducir()
-		game.schedule(5000, { poder = desactivado
-			//sonidoGameplay2.reproducir()
-		})
-		elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
-
-	}
-
-	method validarActivarSuperPoder() {
 		if (not self.tieneElementosNecesariosParaSuperPoder()) {
-			self.error("Todavia no puedo activar el poder!")
+			game.say(carpincho, "Todavia no puedo activar el poder!")
+		} else {
+			poder = activado
+			//sonidoGameplay.parar()
+			//sonidoSuperpoder.reproducir()
+			game.schedule(5000, { poder = desactivado
+				//sonidoGameplay2.reproducir()
+			})
+			elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 		}
+		
 	}
+
 
 	method tieneElementosNecesariosParaSuperPoder() {
 		return elementosParaSuperPoder.size() == 3
 	}
 
 	method agarrarElemento(elemento) {
-		self.validarAgarrarElemento(elemento)
-		elementosParaSuperPoder.add(elemento)
+		if (elementosParaSuperPoder.contains(elemento)) {
+			game.say(carpincho, "Ya tengo este elemento!")
+		} else {
+			elementosParaSuperPoder.add(elemento)
+		}
+		
 	}
 
-	method validarAgarrarElemento(elemento) {
-		if (elementosParaSuperPoder.contains(elemento)) {
-			self.error("Ya tengo este elemento!")
-		}
-	}
 
 }
