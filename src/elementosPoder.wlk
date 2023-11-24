@@ -13,12 +13,8 @@ object elementosMateManager {
 	}
 	
 	method generar() {
-		
-		if(generados.isEmpty()) { 		
-			game.addVisual(mate)	
-			game.addVisual(yerba)
-			game.addVisual(termo)
-			generados.addAll(elementos)
+		if(generados.isEmpty()) {
+			elementos.forEach({elemento => elemento.agregarYGenerar(generados)})
 		}
 	}
 	
@@ -28,12 +24,10 @@ object elementosMateManager {
 	}
 }
 
-class ElementosMate {
+class ElementoMate {
 	var property position
 	
-	method image() {
-		return "mate.png"
-	}
+	method image()
 	
 	method colision(personaje) {
 		personaje.agarrarElemento(self)	
@@ -45,10 +39,15 @@ class ElementosMate {
 	method solido() {
 		return false
 	}
+	
+	method agregarYGenerar(generados) {
+		game.addVisual(self)
+		generados.add(self)
+	}
 }
 
 
-object mate inherits ElementosMate(position=randomizer.emptyPosition()) {
+object mate inherits ElementoMate(position=randomizer.emptyPosition()) {
 	
 	
 	override method image() {
@@ -57,7 +56,7 @@ object mate inherits ElementosMate(position=randomizer.emptyPosition()) {
 		
 }
 
-object yerba inherits ElementosMate(position=randomizer.emptyPosition()) {
+object yerba inherits ElementoMate(position=randomizer.emptyPosition()) {
 	
 	override method image() {
 		return "yerba.png"
@@ -65,7 +64,7 @@ object yerba inherits ElementosMate(position=randomizer.emptyPosition()) {
 
 }
 
-object termo inherits ElementosMate(position=randomizer.emptyPosition()) {
+object termo inherits ElementoMate(position=randomizer.emptyPosition()) {
 
 	override method image() {
 		return "termo.png"
