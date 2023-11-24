@@ -1,8 +1,19 @@
 import wollok.game.*
-import pepita.*
+import carpincho.*
+import direcciones.*
+import obstaculos.*
+import extras.*
+import enemigos.*
+import mapa.*
+import sonidos.*
+import elementosPoder.*
+import tablero.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	
+	game.title("El carpincho de Nordelta")
+	
+	tablero.iniciar()
+	
 	game.start()
 }
