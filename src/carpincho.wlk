@@ -62,12 +62,9 @@ object carpincho {
 	method enfrentarseAVisual(personaje) {
 		energia -= personaje.energiaQueSaca()
 		if (not self.tieneEnergiaParaMover()) {
-			// game.removeTickEvent("MOVER")
-			//game.schedule(3000, { game.stop()})
-			game.schedule(1000, { //sonidoGameover.reproducir()  
+			game.schedule(1000, {
 				tablero.perdedor()
 			})
-			//energia = 0
 		}
 	}
 
@@ -88,10 +85,7 @@ object carpincho {
 			game.say(carpincho, "Todavia no puedo activar el poder!")
 		} else {
 			poder = activado
-			//sonidoGameplay.parar()
-			//sonidoSuperpoder.reproducir()
 			game.schedule(5000, { poder = desactivado
-				//sonidoGameplay2.reproducir()
 			})
 			elementosParaSuperPoder.removeAll(elementosParaSuperPoder)
 		}

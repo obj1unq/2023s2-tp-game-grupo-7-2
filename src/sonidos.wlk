@@ -38,19 +38,6 @@ object sonidoGameplay inherits Sonido(sonido = game.sound("gameplay.mp3")){
 	}
 }
 
-object sonidoGameplay2 inherits Sonido(sonido = game.sound("gameplay2.mp3")){
-	
-	override method reproducir(){
-		self.reiniciar()
-		sonido.play()
-		sonido.shouldLoop(true)
-	}
-	
-	override method nombre(){
-		return game.sound("gameplay2.mp3")
-	}
-}
-
 object sonidoGameover inherits Sonido(sonido = game.sound("gameover.mp3")){
 	
 	override method nombre(){
